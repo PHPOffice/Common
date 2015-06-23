@@ -16,7 +16,7 @@
 
 namespace PhpOffice\Common\Tests;
 
-use PhpOffice\Common\Shared\Drawing;
+use PhpOffice\Common\Drawing;
 
 /**
  * Test class for IOFactory
