@@ -263,7 +263,7 @@ class OLERead
                 // tmp helper to simplify checks
                 $upName = strtoupper($name);
                 
-                switch ($upName){
+                switch ($upName) {
                     case 'ROOT ENTRY':
                     case 'R':
                         $this->rootEntry = count($this->props) - 1;
