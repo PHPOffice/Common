@@ -16,7 +16,7 @@
 
 namespace PhpOffice\Common\Tests;
 
-use PhpOffice\Common\Shared\String;
+use PhpOffice\Common\String;
 
 /**
  * Test class for String

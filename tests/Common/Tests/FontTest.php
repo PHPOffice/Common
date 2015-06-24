@@ -16,7 +16,7 @@
 
 namespace PhpOffice\Common\Tests;
 
-use PhpOffice\Common\Shared\Font;
+use PhpOffice\Common\Font;
 
 /**
  * Test class for Font

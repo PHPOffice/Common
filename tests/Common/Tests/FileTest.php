@@ -16,7 +16,7 @@
 
 namespace PhpOffice\Common\Tests;
 
-use PhpOffice\Common\Shared\File;
+use PhpOffice\Common\File;
 
 /**
  * Test class for File
