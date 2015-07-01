@@ -43,4 +43,17 @@ class StringTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('2.1', String::numberFormat('2.12', 1));
         $this->assertEquals('1234', String::numberFormat(1234, 1));
     }
+    
+    public function testChr()
+    {
+        $this->assertEquals('A', String::chr(65));
+        $this->assertEquals('A', String::chr(0x41));
+        $this->assertEquals('é', String::chr(233));
+        $this->assertEquals('é', String::chr(0xE9));
+        $this->assertEquals('⼳', String::chr(12083));
+        $this->assertEquals('⼳', String::chr(0x2F33));
+        $this->assertEquals('🌃', String::chr(127747));
+        $this->assertEquals('🌃', String::chr(0x1F303));
+        $this->assertEquals('', String::chr(2097152));
+    }
 }
