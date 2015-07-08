@@ -17,9 +17,9 @@
 namespace PhpOffice\Common;
 
 /**
- * String
+ * Text
  */
-class String
+class Text
 {
     /**
      * Control characters array
