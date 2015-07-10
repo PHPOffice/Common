@@ -13,3 +13,8 @@
 
 ### Changes
 - Renamed String class in Text class for supporting PHP7
+
+## 0.2.1
+
+### Features
+- Added XMLReader from PHPWord
