@@ -51,7 +51,7 @@ class XMLReader
             throw new \Exception('Cannot find archive file.');
         }
 
-        $zip = new ZipArchive();
+        $zip = new \ZipArchive();
         $zip->open($zipFile);
         $content = $zip->getFromName($xmlFile);
         $zip->close();
