@@ -18,3 +18,8 @@
 
 ### Features
 - Added XMLReader from PHPWord
+
+## 0.2.2
+
+### BugFix
+- Fixed "Class 'PhpOffice\Common\ZipArchive' not found in /src/Common/XMLReader.php on line 54"
