@@ -59,7 +59,7 @@ class XMLWriter
      * @param int $pTemporaryStorage Temporary storage location
      * @param string $pTemporaryStorageDir Temporary storage folder
      */
-    public function __construct($pTemporaryStorage = self::STORAGE_MEMORY, $pTemporaryStorageDir = './')
+    public function __construct($pTemporaryStorage = self::STORAGE_MEMORY, $pTemporaryStorageDir = './', $compatibility = false)
     {
         // Create internal XMLWriter
         $this->xmlWriter = new \XMLWriter();
@@ -75,8 +75,13 @@ class XMLWriter
             $this->xmlWriter->openUri($this->tempFileName);
         }
 
-        // Set default values
-        $this->xmlWriter->setIndent(true);
+        if ($compatibility) {
+            $this->xmlWriter->setIndent(false);
+            $this->xmlWriter->setIndentString('');
+        } else {
+            $this->xmlWriter->setIndent(true);
+            $this->xmlWriter->setIndentString('  ');
+        }
     }
 
     /**
@@ -124,6 +129,68 @@ class XMLWriter
         } else {
             $this->xmlWriter->flush();
             return file_get_contents($this->tempFileName);
+        }
+    }
+
+
+    /**
+     * Write simple element and attribute(s) block
+     *
+     * There are two options:
+     * 1. If the `$attributes` is an array, then it's an associative array of attributes
+     * 2. If not, then it's a simple attribute-value pair
+     *
+     * @param string $element
+     * @param string|array $attributes
+     * @param string $value
+     * @return void
+     */
+    public function writeElementBlock($element, $attributes, $value = null)
+    {
+        $this->xmlWriter->startElement($element);
+        if (!is_array($attributes)) {
+            $attributes = array($attributes => $value);
+        }
+        foreach ($attributes as $attribute => $value) {
+            $this->xmlWriter->writeAttribute($attribute, $value);
+        }
+        $this->xmlWriter->endElement();
+    }
+
+    /**
+     * Write element if ...
+     *
+     * @param bool $condition
+     * @param string $element
+     * @param string $attribute
+     * @param mixed $value
+     * @return void
+     */
+    public function writeElementIf($condition, $element, $attribute = null, $value = null)
+    {
+        if ($condition == true) {
+            if (is_null($attribute)) {
+                $this->xmlWriter->writeElement($element, $value);
+            } else {
+                $this->xmlWriter->startElement($element);
+                $this->xmlWriter->writeAttribute($attribute, $value);
+                $this->xmlWriter->endElement();
+            }
+        }
+    }
+
+    /**
+     * Write attribute if ...
+     *
+     * @param bool $condition
+     * @param string $attribute
+     * @param mixed $value
+     * @return void
+     */
+    public function writeAttributeIf($condition, $attribute, $value)
+    {
+        if ($condition == true) {
+            $this->xmlWriter->writeAttribute($attribute, $value);
         }
     }
 }

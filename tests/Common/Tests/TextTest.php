@@ -35,6 +35,9 @@ class TextTest extends \PHPUnit_Framework_TestCase
 
         $value = rand(0, 8);
         $this->assertEquals('_x'.sprintf('%04s', strtoupper(dechex($value))).'_', Text::controlCharacterPHP2OOXML(chr($value)));
+
+        $this->assertEquals('', Text::controlCharacterOOXML2PHP(''));
+        $this->assertEquals(chr(0x08), Text::controlCharacterOOXML2PHP('_x0008_'));
     }
     
     public function testNumberFormat()
@@ -55,5 +58,32 @@ class TextTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('🌃', Text::chr(127747));
         $this->assertEquals('🌃', Text::chr(0x1F303));
         $this->assertEquals('', Text::chr(2097152));
+    }
+    /**
+     * Is UTF8
+     */
+    public function testIsUTF8()
+    {
+        $this->assertTrue(Text::isUTF8(''));
+        $this->assertTrue(Text::isUTF8('éééé'));
+        $this->assertFalse(Text::isUTF8(utf8_decode('éééé')));
+    }
+
+    /**
+     * Test unicode conversion
+     */
+    public function testToUnicode()
+    {
+        $this->assertEquals('a', Text::toUnicode('a'));
+        $this->assertEquals('\uc0{\u8364}', Text::toUnicode('€'));
+        $this->assertEquals('\uc0{\u233}', Text::toUnicode('é'));
+    }
+
+    /**
+     * Test remove underscore prefix
+     */
+    public function testRemoveUnderscorePrefix()
+    {
+        $this->assertEquals('item', Text::removeUnderscorePrefix('_item'));
     }
 }

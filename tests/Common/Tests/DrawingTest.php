@@ -27,6 +27,18 @@ class DrawingTest extends \PHPUnit_Framework_TestCase
 {
     /**
      */
+    public function testDegreesAngle()
+    {
+        $value = rand(1, 100);
+
+        $this->assertEquals(0, Drawing::degreesToAngle());
+        $this->assertEquals((int) round($value * 60000), Drawing::degreesToAngle($value));
+        $this->assertEquals(0, Drawing::angleToDegrees());
+        $this->assertEquals(round($value / 60000), Drawing::angleToDegrees($value));
+    }
+
+    /**
+     */
     public function testPixelsCentimeters()
     {
         $value = rand(1, 100);
@@ -36,17 +48,7 @@ class DrawingTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, Drawing::centimetersToPixels());
         $this->assertEquals($value / 2.54 * Drawing::DPI_96, Drawing::centimetersToPixels($value));
     }
-    
-    /**
-     */
-    public function testPointsCentimeters()
-    {
-        $value = rand(1, 100);
 
-        $this->assertEquals(0, Drawing::pointsToCentimeters());
-        $this->assertEquals($value * 1.333333333 / Drawing::DPI_96 * 2.54, Drawing::pointsToCentimeters($value));
-    }
-    
     /**
      */
     public function testPixelsEMU()
@@ -73,13 +75,51 @@ class DrawingTest extends \PHPUnit_Framework_TestCase
 
     /**
      */
-    public function testDegreesAngle()
+    public function testPointsCentimeters()
     {
         $value = rand(1, 100);
 
-        $this->assertEquals(0, Drawing::degreesToAngle());
-        $this->assertEquals((int) round($value * 60000), Drawing::degreesToAngle($value));
-        $this->assertEquals(0, Drawing::angleToDegrees());
-        $this->assertEquals(round($value / 60000), Drawing::angleToDegrees($value));
+        $this->assertEquals(0, Drawing::pointsToCentimeters());
+        $this->assertEquals($value * 1.333333333 / Drawing::DPI_96 * 2.54, Drawing::pointsToCentimeters($value));
+    }
+
+    /**
+     */
+    public function testTwips()
+    {
+        $value = rand(1, 100);
+
+        // Centimeters
+        $this->assertEquals(0, Drawing::centimetersToTwips());
+        $this->assertEquals($value * 566.928, Drawing::centimetersToTwips($value));
+
+        $this->assertEquals(0, Drawing::twipsToCentimeters());
+        $this->assertEquals($value / 566.928, Drawing::twipsToCentimeters($value));
+
+        // Inches
+        $this->assertEquals(0, Drawing::inchesToTwips());
+        $this->assertEquals($value * 1440, Drawing::inchesToTwips($value));
+
+        $this->assertEquals(0, Drawing::twipsToInches());
+        $this->assertEquals($value / 1440, Drawing::twipsToInches($value));
+
+        // Pixels
+        $this->assertEquals(0, Drawing::twipsToPixels());
+        $this->assertEquals(round($value / 15.873984), Drawing::twipsToPixels($value));
+    }
+
+    public function testHTML()
+    {
+        $this->assertFalse(Drawing::htmlToRGB('0'));
+        $this->assertFalse(Drawing::htmlToRGB('00'));
+        $this->assertFalse(Drawing::htmlToRGB('0000'));
+        $this->assertFalse(Drawing::htmlToRGB('00000'));
+
+        $this->assertInternalType('array', Drawing::htmlToRGB('ABCDEF'));
+        $this->assertCount(3, Drawing::htmlToRGB('ABCDEF'));
+        $this->assertEquals(array(0xAB, 0xCD, 0xEF), Drawing::htmlToRGB('ABCDEF'));
+        $this->assertEquals(array(0xAB, 0xCD, 0xEF), Drawing::htmlToRGB('#ABCDEF'));
+        $this->assertEquals(array(0xAA, 0xBB, 0xCC), Drawing::htmlToRGB('ABC'));
+        $this->assertEquals(array(0xAA, 0xBB, 0xCC), Drawing::htmlToRGB('#ABC'));
     }
 }

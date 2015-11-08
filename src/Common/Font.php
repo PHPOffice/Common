@@ -53,4 +53,48 @@ class Font
     {
         return ($sizeInCm * 37.795275591);
     }
+
+    /**
+     * Convert centimeter to twip
+     *
+     * @param int $sizeInCm
+     * @return double
+     */
+    public static function centimeterSizeToTwips($sizeInCm = 1)
+    {
+        return $sizeInCm / 2.54 * 1440;
+    }
+
+    /**
+     * Convert inch to twip
+     *
+     * @param int $sizeInInch
+     * @return double
+     */
+    public static function inchSizeToTwips($sizeInInch = 1)
+    {
+        return $sizeInInch * 1440;
+    }
+
+    /**
+     * Convert pixel to twip
+     *
+     * @param int $sizeInPixel
+     * @return double
+     */
+    public static function pixelSizeToTwips($sizeInPixel = 1)
+    {
+        return $sizeInPixel / 96 * 1440;
+    }
+
+    /**
+     * Calculate twip based on point size, used mainly for paragraph spacing
+     *
+     * @param integer $sizeInPoint Size in point
+     * @return integer Size (in twips)
+     */
+    public static function pointSizeToTwips($sizeInPoint = 1)
+    {
+        return $sizeInPoint / 72 * 1440;
+    }
 }

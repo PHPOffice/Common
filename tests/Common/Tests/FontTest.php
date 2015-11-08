@@ -36,5 +36,9 @@ class FontTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(96 * $value, Font::inchSizeToPixels($value));
         $this->assertEquals(37.795275591, Font::centimeterSizeToPixels());
         $this->assertEquals(37.795275591 * $value, Font::centimeterSizeToPixels($value));
+        $this->assertEquals($value / 2.54 * 1440, Font::centimeterSizeToTwips($value));
+        $this->assertEquals($value * 1440, Font::inchSizeToTwips($value));
+        $this->assertEquals($value / 96 * 1440, Font::pixelSizeToTwips($value));
+        $this->assertEquals($value / 72 * 1440, Font::pointSizeToTwips($value));
     }
 }
