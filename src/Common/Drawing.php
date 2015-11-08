@@ -142,4 +142,101 @@ class Drawing
             return 0;
         }
     }
+
+    /**
+     * Convert centimeters width to twips
+     *
+     * @param integer $pValue
+     */
+    public static function centimetersToTwips($pValue = 0)
+    {
+        if ($pValue != 0) {
+            return $pValue * 566.928;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Convert twips width to centimeters
+     *
+     * @param integer $pValue
+     */
+    public static function twipsToCentimeters($pValue = 0)
+    {
+        if ($pValue != 0) {
+            return $pValue / 566.928;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Convert inches width to twips
+     *
+     * @param integer $pValue
+     */
+    public static function inchesToTwips($pValue = 0)
+    {
+        if ($pValue != 0) {
+            return $pValue * 1440;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Convert twips width to inches
+     *
+     * @param integer $pValue
+     */
+    public static function twipsToInches($pValue = 0)
+    {
+        if ($pValue != 0) {
+            return $pValue / 1440;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Convert twips width to pixels
+     *
+     * @param integer $pValue
+     */
+    public static function twipsToPixels($pValue = 0)
+    {
+        if ($pValue != 0) {
+            return round($pValue / 15.873984);
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Convert HTML hexadecimal to RGB
+     *
+     * @param string $pValue HTML Color in hexadecimal
+     * @return array Value in RGB
+     */
+    public static function htmlToRGB($pValue)
+    {
+        if ($pValue[0] == '#') {
+            $pValue = substr($pValue, 1);
+        }
+
+        if (strlen($pValue) == 6) {
+            list($colorR, $colorG, $colorB) = array($pValue[0] . $pValue[1], $pValue[2] . $pValue[3], $pValue[4] . $pValue[5]);
+        } elseif (strlen($pValue) == 3) {
+            list($colorR, $colorG, $colorB) = array($pValue[0] . $pValue[0], $pValue[1] . $pValue[1], $pValue[2] . $pValue[2]);
+        } else {
+            return false;
+        }
+
+        $colorR = hexdec($colorR);
+        $colorG = hexdec($colorG);
+        $colorB = hexdec($colorB);
+
+        return array($colorR, $colorG, $colorB);
+    }
 }
