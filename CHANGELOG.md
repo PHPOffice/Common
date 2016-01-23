@@ -28,3 +28,5 @@
 
 ### Features
 - Added missing features for supporting PHPWord
+
+## 0.2.4
