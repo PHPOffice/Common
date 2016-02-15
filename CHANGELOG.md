@@ -30,3 +30,6 @@
 - Added missing features for supporting PHPWord
 
 ## 0.2.4
+
+### Changes
+- XMLWriter : Refactoring for improving performances
