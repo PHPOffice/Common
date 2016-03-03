@@ -27,7 +27,7 @@ class Drawing
      * Convert pixels to EMU
      *
      * @param  int $pValue Value in pixels
-     * @return int Value in EMU
+     * @return int
      */
     public static function pixelsToEmu($pValue = 0)
     {
@@ -38,22 +38,21 @@ class Drawing
      * Convert EMU to pixels
      *
      * @param  int $pValue Value in EMU
-     * @return int Value in pixels
+     * @return int
      */
     public static function emuToPixels($pValue = 0)
     {
-        if ($pValue != 0) {
-            return round($pValue / 9525);
-        } else {
+        if ($pValue == 0) {
             return 0;
         }
+        return round($pValue / 9525);
     }
 
     /**
      * Convert pixels to points
      *
      * @param  int $pValue Value in pixels
-     * @return int Value in points
+     * @return float
      */
     public static function pixelsToPoints($pValue = 0)
     {
@@ -64,37 +63,35 @@ class Drawing
      * Convert points width to centimeters
      *
      * @param  int $pValue Value in points
-     * @return int Value in centimeters
+     * @return float
      */
     public static function pointsToCentimeters($pValue = 0)
     {
-        if ($pValue != 0) {
-            return ((($pValue * 1.333333333) / self::DPI_96) * 2.54);
-        } else {
+        if ($pValue == 0) {
             return 0;
         }
+        return ((($pValue * 1.333333333) / self::DPI_96) * 2.54);
     }
     
     /**
      * Convert points width to pixels
      *
      * @param  int $pValue Value in points
-     * @return int Value in pixels
+     * @return float
      */
     public static function pointsToPixels($pValue = 0)
     {
-        if ($pValue != 0) {
-            return $pValue * 1.333333333;
-        } else {
+        if ($pValue == 0) {
             return 0;
         }
+        return $pValue * 1.333333333;
     }
 
     /**
      * Convert pixels to centimeters
      *
      * @param  int $pValue Value in pixels
-     * @return int Value in centimeters
+     * @return float
      */
     public static function pixelsToCentimeters($pValue = 0)
     {
@@ -106,22 +103,21 @@ class Drawing
      * Convert centimeters width to pixels
      *
      * @param  int $pValue Value in centimeters
-     * @return int Value in pixels
+     * @return float
      */
     public static function centimetersToPixels($pValue = 0)
     {
-        if ($pValue != 0) {
-            return ($pValue / 2.54) * self::DPI_96;
-        } else {
+        if ($pValue == 0) {
             return 0;
         }
+        return ($pValue / 2.54) * self::DPI_96;
     }
 
     /**
      * Convert degrees to angle
      *
      * @param  int $pValue Degrees
-     * @return int Angle
+     * @return int
      */
     public static function degreesToAngle($pValue = 0)
     {
@@ -132,85 +128,84 @@ class Drawing
      * Convert angle to degrees
      *
      * @param  int $pValue Angle
-     * @return int Degrees
+     * @return int
      */
     public static function angleToDegrees($pValue = 0)
     {
-        if ($pValue != 0) {
-            return round($pValue / 60000);
-        } else {
+        if ($pValue == 0) {
             return 0;
         }
+        return round($pValue / 60000);
     }
 
     /**
      * Convert centimeters width to twips
      *
      * @param integer $pValue
+     * @return float
      */
     public static function centimetersToTwips($pValue = 0)
     {
-        if ($pValue != 0) {
-            return $pValue * 566.928;
-        } else {
+        if ($pValue == 0) {
             return 0;
         }
+        return $pValue * 566.928;
     }
 
     /**
      * Convert twips width to centimeters
      *
      * @param integer $pValue
+     * @return float
      */
     public static function twipsToCentimeters($pValue = 0)
     {
-        if ($pValue != 0) {
-            return $pValue / 566.928;
-        } else {
+        if ($pValue == 0) {
             return 0;
         }
+        return $pValue / 566.928;
     }
 
     /**
      * Convert inches width to twips
      *
      * @param integer $pValue
+     * @return float
      */
     public static function inchesToTwips($pValue = 0)
     {
-        if ($pValue != 0) {
-            return $pValue * 1440;
-        } else {
+        if ($pValue == 0) {
             return 0;
         }
+        return $pValue * 1440;
     }
 
     /**
      * Convert twips width to inches
      *
      * @param integer $pValue
+     * @return float
      */
     public static function twipsToInches($pValue = 0)
     {
-        if ($pValue != 0) {
-            return $pValue / 1440;
-        } else {
+        if ($pValue == 0) {
             return 0;
         }
+        return $pValue / 1440;
     }
 
     /**
      * Convert twips width to pixels
      *
      * @param integer $pValue
+     * @return float
      */
     public static function twipsToPixels($pValue = 0)
     {
-        if ($pValue != 0) {
-            return round($pValue / 15.873984);
-        } else {
+        if ($pValue == 0) {
             return 0;
         }
+        return round($pValue / 15.873984);
     }
 
     /**
