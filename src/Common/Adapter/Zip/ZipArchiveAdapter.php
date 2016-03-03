@@ -21,7 +21,8 @@ class ZipArchiveAdapter implements ZipInterface
      * @throws \Exception Could not open $this->filename for writing.
      * @return mixed
      */
-    public function open($filename) {
+    public function open($filename)
+    {
         $this->filename = $filename;
         $this->oZipArchive = new ZipArchive();
 
