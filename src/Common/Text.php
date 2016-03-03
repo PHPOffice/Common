@@ -115,6 +115,8 @@ class Text
     /**
      * Check if a string contains UTF-8 data
      *
+     * @deprecated 0.2.4 Use `Zend\Stdlib\StringUtils::isValidUtf8` instead.
+     *
      * @param string $value
      * @return boolean
      */

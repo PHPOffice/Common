@@ -33,18 +33,11 @@ namespace PhpOffice\Common;
  * @method bool writeElement(string $name, string $content = null)
  * @method bool writeRaw(string $content)
  */
-class XMLWriter
+class XMLWriter extends \XMLWriter
 {
     /** Temporary storage method */
     const STORAGE_MEMORY = 1;
     const STORAGE_DISK = 2;
-
-    /**
-     * Internal XMLWriter
-     *
-     * @var \XMLWriter
-     */
-    private $xmlWriter;
 
     /**
      * Temporary filename
@@ -59,28 +52,28 @@ class XMLWriter
      * @param int $pTemporaryStorage Temporary storage location
      * @param string $pTemporaryStorageDir Temporary storage folder
      */
-    public function __construct($pTemporaryStorage = self::STORAGE_MEMORY, $pTemporaryStorageDir = './', $compatibility = false)
+    public function __construct($pTemporaryStorage = self::STORAGE_MEMORY, $pTemporaryStorageDir = null, $compatibility = false)
     {
-        // Create internal XMLWriter
-        $this->xmlWriter = new \XMLWriter();
-
         // Open temporary storage
         if ($pTemporaryStorage == self::STORAGE_MEMORY) {
-            $this->xmlWriter->openMemory();
+            $this->openMemory();
         } else {
+            if (!is_dir($pTemporaryStorageDir)) {
+                $pTemporaryStorageDir = sys_get_temp_dir();
+            }
             // Create temporary filename
             $this->tempFileName = @tempnam($pTemporaryStorageDir, 'xml');
 
             // Open storage
-            $this->xmlWriter->openUri($this->tempFileName);
+            $this->openUri($this->tempFileName);
         }
 
         if ($compatibility) {
-            $this->xmlWriter->setIndent(false);
-            $this->xmlWriter->setIndentString('');
+            $this->setIndent(false);
+            $this->setIndentString('');
         } else {
-            $this->xmlWriter->setIndent(true);
-            $this->xmlWriter->setIndentString('  ');
+            $this->setIndent(true);
+            $this->setIndentString('  ');
         }
     }
 
@@ -89,31 +82,12 @@ class XMLWriter
      */
     public function __destruct()
     {
-        // Desctruct XMLWriter
-        unset($this->xmlWriter);
-
         // Unlink temporary files
-        if ($this->tempFileName != '') {
-            if (@unlink($this->tempFileName) === false) {
-                throw new \Exception('The file '.$this->tempFileName.' could not be deleted.');
-            }
+        if (empty($this->tempFileName)) {
+            return;
         }
-    }
-
-    /**
-     * Catch function calls (and pass them to internal XMLWriter)
-     *
-     * @param mixed $function
-     * @param mixed $args
-     */
-    public function __call($function, $args)
-    {
-        try {
-            if (@call_user_func_array(array($this->xmlWriter, $function), $args) === false) {
-                throw new \Exception('The method '.$function.' doesn\'t exist.');
-            }
-        } catch (\Exception $ex) {
-            // Do nothing!
+        if (PHP_OS != 'WINNT' && @unlink($this->tempFileName) === false) {
+            throw new \Exception('The file '.$this->tempFileName.' could not be deleted.');
         }
     }
 
@@ -125,9 +99,9 @@ class XMLWriter
     public function getData()
     {
         if ($this->tempFileName == '') {
-            return $this->xmlWriter->outputMemory(true);
+            return $this->outputMemory(true);
         } else {
-            $this->xmlWriter->flush();
+            $this->flush();
             return file_get_contents($this->tempFileName);
         }
     }
@@ -147,14 +121,14 @@ class XMLWriter
      */
     public function writeElementBlock($element, $attributes, $value = null)
     {
-        $this->xmlWriter->startElement($element);
+        $this->startElement($element);
         if (!is_array($attributes)) {
             $attributes = array($attributes => $value);
         }
         foreach ($attributes as $attribute => $value) {
-            $this->xmlWriter->writeAttribute($attribute, $value);
+            $this->writeAttribute($attribute, $value);
         }
-        $this->xmlWriter->endElement();
+        $this->endElement();
     }
 
     /**
@@ -170,11 +144,11 @@ class XMLWriter
     {
         if ($condition == true) {
             if (is_null($attribute)) {
-                $this->xmlWriter->writeElement($element, $value);
+                $this->writeElement($element, $value);
             } else {
-                $this->xmlWriter->startElement($element);
-                $this->xmlWriter->writeAttribute($attribute, $value);
-                $this->xmlWriter->endElement();
+                $this->startElement($element);
+                $this->writeAttribute($attribute, $value);
+                $this->endElement();
             }
         }
     }
@@ -190,7 +164,7 @@ class XMLWriter
     public function writeAttributeIf($condition, $attribute, $value)
     {
         if ($condition == true) {
-            $this->xmlWriter->writeAttribute($attribute, $value);
+            $this->writeAttribute($attribute, $value);
         }
     }
 }

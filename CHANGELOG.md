@@ -28,3 +28,13 @@
 
 ### Features
 - Added missing features for supporting PHPWord
+
+## 0.2.4
+
+### Changes
+- XMLWriter : Refactoring for improving performances
+
+## 0.2.5
+
+### Features
+- Added Zip Adapters (PclZip & ZipArchive)
