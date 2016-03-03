@@ -52,12 +52,15 @@ class XMLWriter extends \XMLWriter
      * @param int $pTemporaryStorage Temporary storage location
      * @param string $pTemporaryStorageDir Temporary storage folder
      */
-    public function __construct($pTemporaryStorage = self::STORAGE_MEMORY, $pTemporaryStorageDir = './', $compatibility = false)
+    public function __construct($pTemporaryStorage = self::STORAGE_MEMORY, $pTemporaryStorageDir = null, $compatibility = false)
     {
         // Open temporary storage
         if ($pTemporaryStorage == self::STORAGE_MEMORY) {
             $this->openMemory();
         } else {
+            if (!is_dir($pTemporaryStorageDir)) {
+                $pTemporaryStorageDir = sys_get_temp_dir();
+            }
             // Create temporary filename
             $this->tempFileName = @tempnam($pTemporaryStorageDir, 'xml');
 
@@ -80,10 +83,11 @@ class XMLWriter extends \XMLWriter
     public function __destruct()
     {
         // Unlink temporary files
-        if ($this->tempFileName != '') {
-            if (@unlink($this->tempFileName) === false) {
-                throw new \Exception('The file '.$this->tempFileName.' could not be deleted.');
-            }
+        if (empty($this->tempFileName)) {
+            return;
+        }
+        if (PHP_OS != 'WINNT' && @unlink($this->tempFileName) === false) {
+            throw new \Exception('The file '.$this->tempFileName.' could not be deleted.');
         }
     }
 
