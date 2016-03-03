@@ -22,7 +22,9 @@ class ZipArchiveAdapterTest extends \PHPUnit_Framework_TestCase
     {
         parent::tearDown();
 
-        unlink($this->zipTest);
+        if (is_file($this->zipTest)) {
+            unlink($this->zipTest); 
+        }
     }
 
     public function testOpen()
