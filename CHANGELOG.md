@@ -37,4 +37,4 @@
 ## 0.2.5
 
 ### Features
-- Added Zip Adapter (PclZip & ZipArchive)
+- Added Zip Adapters (PclZip & ZipArchive)

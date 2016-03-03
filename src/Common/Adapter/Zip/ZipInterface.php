@@ -2,7 +2,6 @@
 
 namespace PhpOffice\Common\Adapter\Zip;
 
-
 interface ZipInterface
 {
     public function open($filename);
