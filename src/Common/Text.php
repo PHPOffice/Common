@@ -162,7 +162,7 @@ class Text
      * @since 0.11.0
      * @link http://www.randomchaos.com/documents/?source=php_and_unicode
      */
-    private static function utf8ToUnicode($text)
+    public static function utf8ToUnicode($text)
     {
         $unicode = array();
         $values = array();
