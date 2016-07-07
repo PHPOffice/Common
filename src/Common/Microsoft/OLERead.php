@@ -10,7 +10,7 @@
  * contributors, visit https://github.com/PHPOffice/Common/contributors.
  *
  * @link        https://github.com/PHPOffice/Common
- * @copyright   2009-2014 PHPOffice Common contributors
+ * @copyright   2009-2016 PHPOffice Common contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
 

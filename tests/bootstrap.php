@@ -9,7 +9,7 @@
  * file that was distributed with this source code. For the full list of
  * contributors, visit https://github.com/PHPOffice/Common/contributors.
  *
- * @copyright   2010-2014 PHPOffice Common contributors
+ * @copyright   2010-2016 PHPOffice Common contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  * @link        https://github.com/PHPOffice/Common
  */

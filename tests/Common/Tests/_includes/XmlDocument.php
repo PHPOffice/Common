@@ -11,7 +11,7 @@
  * contributors, visit https://github.com/PHPOffice/PHPPowerPoint/contributors.
  *
  * @link        https://github.com/PHPOffice/PHPPowerPoint
- * @copyright   2010-2014 PHPPowerPoint contributors
+ * @copyright   2010-2016 PHPPowerPoint contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
 
