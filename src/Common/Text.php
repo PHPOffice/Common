@@ -10,7 +10,7 @@
  * contributors, visit https://github.com/PHPOffice/Common/contributors.
  *
  * @link        https://github.com/PHPOffice/Common
- * @copyright   2009-2014 PHPOffice Common contributors
+ * @copyright   2009-2016 PHPOffice Common contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
 
@@ -162,7 +162,7 @@ class Text
      * @since 0.11.0
      * @link http://www.randomchaos.com/documents/?source=php_and_unicode
      */
-    private static function utf8ToUnicode($text)
+    public static function utf8ToUnicode($text)
     {
         $unicode = array();
         $values = array();
