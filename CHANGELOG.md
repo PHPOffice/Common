@@ -38,3 +38,8 @@
 
 ### Features
 - Added Zip Adapters (PclZip & ZipArchive)
+
+## 0.2.6
+
+### Changes
+- `\PhpOffice\Common\Text::utf8ToUnicode()` became `public`.
