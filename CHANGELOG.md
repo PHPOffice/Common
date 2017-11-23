@@ -48,3 +48,4 @@
 
 ### Features
 - Added `\PhpOffice\Common\File::fileGetContents()` (with support of zip://)
+- Added Support for PHP 7.1
