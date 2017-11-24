@@ -82,9 +82,9 @@ class PasswordEncoder
      * @see https://blogs.msdn.microsoft.com/vsod/2010/04/05/how-to-set-the-editing-restrictions-in-word-using-open-xml-sdk-2-0/
      *
      * @param string $password
-     * @param number $algorithmSid
+     * @param integer $algorithmSid
      * @param string $salt
-     * @param number $spinCount
+     * @param integer $spinCount
      * @return string
      */
     public static function hashPassword($password, $algorithmSid = 4, $salt = null, $spinCount = 10000)
@@ -155,16 +155,17 @@ class PasswordEncoder
      */
     private static function buildCombinedKey($byteChars)
     {
+    	$byteCharsLength = count($byteChars);
         // Compute the high-order word
         // Initialize from the initial code array (see above), depending on the passwords length.
-        $highOrderWord = self::$initialCodeArray[count($byteChars) - 1];
+    	$highOrderWord = self::$initialCodeArray[$byteCharsLength - 1];
 
         // For each character in the password:
         //   For every bit in the character, starting with the least significant and progressing to (but excluding)
         //   the most significant, if the bit is set, XOR the key’s high-order word with the corresponding word from
         //   the Encryption Matrix
-        for ($i = 0; $i < count($byteChars); $i++) {
-            $tmp = self::$passwordMaxLength - count($byteChars) + $i;
+        for ($i = 0; $i < $byteCharsLength; $i++) {
+        	$tmp = self::$passwordMaxLength - $byteCharsLength + $i;
             $matrixRow = self::$encryptionMatrix[$tmp];
             for ($intBit = 0; $intBit < 7; $intBit++) {
                 if (($byteChars[$i] & (0x0001 << $intBit)) != 0) {
@@ -177,12 +178,12 @@ class PasswordEncoder
         // Initialize with 0
         $lowOrderWord = 0;
         // For each character in the password, going backwards
-        for ($i = count($byteChars) - 1; $i >= 0; $i--) {
+        for ($i = $byteCharsLength - 1; $i >= 0; $i--) {
             // low-order word = (((low-order word SHR 14) AND 0x0001) OR (low-order word SHL 1) AND 0x7FFF)) XOR character
             $lowOrderWord = (((($lowOrderWord >> 14) & 0x0001) | (($lowOrderWord << 1) & 0x7FFF)) ^ $byteChars[$i]);
         }
         // Lastly, low-order word = (((low-order word SHR 14) AND 0x0001) OR (low-order word SHL 1) AND 0x7FFF)) XOR strPassword length XOR 0xCE4B.
-        $lowOrderWord = (((($lowOrderWord >> 14) & 0x0001) | (($lowOrderWord << 1) & 0x7FFF)) ^ count($byteChars) ^ 0xCE4B);
+        $lowOrderWord = (((($lowOrderWord >> 14) & 0x0001) | (($lowOrderWord << 1) & 0x7FFF)) ^ $byteCharsLength ^ 0xCE4B);
 
         // Combine the Low and High Order Word
         return self::int32(($highOrderWord << 16) + $lowOrderWord);
