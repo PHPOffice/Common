@@ -155,17 +155,17 @@ class PasswordEncoder
      */
     private static function buildCombinedKey($byteChars)
     {
-    	$byteCharsLength = count($byteChars);
+        $byteCharsLength = count($byteChars);
         // Compute the high-order word
         // Initialize from the initial code array (see above), depending on the passwords length.
-    	$highOrderWord = self::$initialCodeArray[$byteCharsLength - 1];
+        $highOrderWord = self::$initialCodeArray[$byteCharsLength - 1];
 
         // For each character in the password:
         //   For every bit in the character, starting with the least significant and progressing to (but excluding)
         //   the most significant, if the bit is set, XOR the key’s high-order word with the corresponding word from
         //   the Encryption Matrix
         for ($i = 0; $i < $byteCharsLength; $i++) {
-        	$tmp = self::$passwordMaxLength - $byteCharsLength + $i;
+            $tmp = self::$passwordMaxLength - $byteCharsLength + $i;
             $matrixRow = self::$encryptionMatrix[$tmp];
             for ($intBit = 0; $intBit < 7; $intBit++) {
                 if (($byteChars[$i] & (0x0001 << $intBit)) != 0) {
