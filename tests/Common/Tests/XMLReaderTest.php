@@ -63,11 +63,14 @@ class XMLReaderTest extends \PHPUnit_Framework_TestCase
     public function testThrowsExceptionOnNonExistingArchive()
     {
         $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR;
-        
+
         $reader = new XMLReader();
         $reader->getDomFromZip($pathResources. 'readers.zip', 'test.xml');
     }
 
+    /**
+     * Test elements count
+     */
     public function testCountElements()
     {
         $reader = new XMLReader();
@@ -76,12 +79,15 @@ class XMLReaderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, $reader->countElements('/element/child'));
     }
 
+    /**
+     * Test read non existing elements
+     */
     public function testReturnNullOnNonExistingNode()
     {
         $reader = new XMLReader();
         $this->assertEmpty($reader->getElements('/element/children'));
         $reader->getDomFromString('<element><child>AAA</child></element>');
-        
+
         $this->assertNull($reader->getElement('/element/children'));
         $this->assertNull($reader->getValue('/element/children'));
     }
