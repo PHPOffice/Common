@@ -101,6 +101,25 @@ class XMLReader
     }
 
     /**
+     * Registers the namespace with the DOMXPath object
+     *
+     * @param string $prefix The prefix
+     * @param string $namespaceURI The URI of the namespace
+     * @return bool true on success or false on failure
+     * @throws \InvalidArgumentException If called before having loaded the DOM document
+     */
+    public function registerNamespace($prefix, $namespaceURI)
+    {
+        if ($this->dom === null) {
+            throw new \InvalidArgumentException('Dom needs to be loaded before registering a namespace');
+        }
+        if ($this->xpath === null) {
+            $this->xpath = new \DOMXpath($this->dom);
+        }
+        return $this->xpath->registerNamespace($prefix, $namespaceURI);
+    }
+
+    /**
      * Get element
      *
      * @param string $path
