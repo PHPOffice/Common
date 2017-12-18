@@ -100,10 +100,10 @@ class XMLWriter extends \XMLWriter
     {
         if ($this->tempFileName == '') {
             return $this->outputMemory(true);
-        } else {
-            $this->flush();
-            return file_get_contents($this->tempFileName);
         }
+
+        $this->flush();
+        return file_get_contents($this->tempFileName);
     }
 
 
