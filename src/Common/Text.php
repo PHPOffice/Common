@@ -120,7 +120,7 @@ class Text
      */
     public static function isUTF8($value = '')
     {
-        return is_string($str) && ($str === '' || preg_match('/^./su', $str) == 1);
+        return is_string($value) && ($value === '' || preg_match('/^./su', $value) == 1);
     }
 
     /**
