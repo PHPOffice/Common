@@ -63,7 +63,7 @@ class XMLWriterTest extends \PHPUnit_Framework_TestCase
         $xmlWriter->writeAttribute('name', $value);
         $xmlWriter->endElement();
 
-        setlocale(LC_NUMERIC, 'de');
+        setlocale(LC_NUMERIC, 'de_DE.UTF-8', 'de');
 
         $this->assertSame('1,2', (string)$value);
         $this->assertSame('<element name="1.2"/>' . chr(10), $xmlWriter->getData());
