@@ -22,7 +22,7 @@ use PhpOffice\Common\Microsoft\PasswordEncoder;
  * Test class for PhpOffice\Common\PasswordEncoder
  * @coversDefaultClass \PhpOffice\Common\PasswordEncoder
  */
-class PasswordEncoderTest extends \PHPUnit_Framework_TestCase
+class PasswordEncoderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test that a password can be hashed without specifying any additional parameters

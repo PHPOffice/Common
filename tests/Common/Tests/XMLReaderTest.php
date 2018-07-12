@@ -23,7 +23,7 @@ use PhpOffice\Common\XMLReader;
  *
  * @coversDefaultClass PhpOffice\Common\XMLReader
  */
-class XMLReaderTest extends \PHPUnit_Framework_TestCase
+class XMLReaderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test reading XML from string
@@ -94,16 +94,20 @@ class XMLReaderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test that xpath fails if custom namespace is not registered
-     *
-     * @expectedException Exception
      */
     public function testShouldThrowExceptionIfNamespaceIsNotKnown()
     {
-        $reader = new XMLReader();
-        $reader->getDomFromString('<element><test:child xmlns:test="http://phpword.com/my/custom/namespace">AAA</test:child></element>');
+        try {
+            $reader = new XMLReader();
+            $reader->getDomFromString('<element><test:child xmlns:test="http://phpword.com/my/custom/namespace">AAA</test:child></element>');
 
-        $this->assertTrue($reader->elementExists('/element/test:child'));
-        $this->assertEquals('AAA', $reader->getElement('/element/test:child')->textContent);
+            $this->assertTrue($reader->elementExists('/element/test:child'));
+            $this->assertEquals('AAA', $reader->getElement('/element/test:child')->textContent);
+            $this->fail();
+        } catch (\Exception $e) {
+            $this->assertTrue(true);
+        }
+
     }
 
     /**
