@@ -107,7 +107,6 @@ class XMLReaderTest extends \PHPUnit\Framework\TestCase
         } catch (\Exception $e) {
             $this->assertTrue(true);
         }
-
     }
 
     /**
