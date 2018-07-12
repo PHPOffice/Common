@@ -43,13 +43,13 @@ class File
                 $zip->close();
 
                 return $returnValue;
-            } else {
-                return false;
             }
-        } else {
-            // Regular file_exists
-            return file_exists($pFilename);
+
+            return false;
         }
+
+        // Regular file_exists
+        return file_exists($pFilename);
     }
     /**
      * Returns the content of a file
