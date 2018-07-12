@@ -71,6 +71,7 @@ class XMLReader
      */
     public function getDomFromString($content)
     {
+        libxml_disable_entity_loader(true);
         $this->dom = new \DOMDocument();
         $this->dom->loadXML($content);
 
