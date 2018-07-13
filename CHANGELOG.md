@@ -49,3 +49,13 @@
 ### Features
 - Added `\PhpOffice\Common\File::fileGetContents()` (with support of zip://)
 - Added Support for PHP 7.1
+
+## 0.2.8
+
+### Features
+- Added possibility to register namespaces to DOMXpath
+- Added Utility to get an Office compatible hash of a password
+- Write attribute's value of type float independently of locale
+
+## 0.2.9
+- Fix XML Entity injection vulnerability
