@@ -23,7 +23,7 @@ use PhpOffice\Common\XMLWriter;
  *
  * @coversDefaultClass PhpOffice\Common\XMLWriter
  */
-class XMLWriterTest extends \PHPUnit_Framework_TestCase
+class XMLWriterTest extends \PHPUnit\Framework\TestCase
 {
     /**
      */

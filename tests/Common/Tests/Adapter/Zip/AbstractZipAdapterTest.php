@@ -4,7 +4,7 @@ namespace Common\Tests\Adapter\Zip;
 
 use PhpOffice\Common\Tests\TestHelperZip;
 
-abstract class AbstractZipAdapterTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractZipAdapterTest extends \PHPUnit\Framework\TestCase
 {
     protected $zipTest;
 

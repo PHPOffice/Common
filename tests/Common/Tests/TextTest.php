@@ -23,7 +23,7 @@ use PhpOffice\Common\Text;
  *
  * @coversDefaultClass PhpOffice\Common\Text
  */
-class TextTest extends \PHPUnit_Framework_TestCase
+class TextTest extends \PHPUnit\Framework\TestCase
 {
     /**
      */
@@ -39,14 +39,14 @@ class TextTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('', Text::controlCharacterOOXML2PHP(''));
         $this->assertEquals(chr(0x08), Text::controlCharacterOOXML2PHP('_x0008_'));
     }
-    
+
     public function testNumberFormat()
     {
         $this->assertEquals('2.1', Text::numberFormat('2.06', 1));
         $this->assertEquals('2.1', Text::numberFormat('2.12', 1));
-        $this->assertEquals('1234', Text::numberFormat(1234, 1));
+        $this->assertEquals('1234.0', Text::numberFormat(1234, 1));
     }
-    
+
     public function testChr()
     {
         $this->assertEquals('A', Text::chr(65));

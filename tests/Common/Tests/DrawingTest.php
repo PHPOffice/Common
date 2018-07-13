@@ -23,7 +23,7 @@ use PhpOffice\Common\Drawing;
  *
  * @coversDefaultClass PhpOffice\Common\IOFactory
  */
-class DrawingTest extends \PHPUnit_Framework_TestCase
+class DrawingTest extends \PHPUnit\Framework\TestCase
 {
     /**
      */

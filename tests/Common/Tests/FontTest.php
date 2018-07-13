@@ -23,7 +23,7 @@ use PhpOffice\Common\Font;
  *
  * @coversDefaultClass PhpOffice\Common\Font
  */
-class FontTest extends \PHPUnit_Framework_TestCase
+class FontTest extends \PHPUnit\Framework\TestCase
 {
     /**
      */
