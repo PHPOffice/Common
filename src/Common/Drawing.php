@@ -212,7 +212,7 @@ class Drawing
      * Convert HTML hexadecimal to RGB
      *
      * @param string $pValue HTML Color in hexadecimal
-     * @return array Value in RGB
+     * @return array|false Value in RGB
      */
     public static function htmlToRGB($pValue)
     {
