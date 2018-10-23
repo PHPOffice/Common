@@ -69,6 +69,7 @@ class Text
      * Return a number formatted for being integrated in xml files
      * @param float $number
      * @param integer $decimals
+     * @return string
      */
     public static function numberFormat($number, $decimals)
     {
@@ -79,6 +80,7 @@ class Text
      * @param int $dec
      * @link http://stackoverflow.com/a/7153133/2235790
      * @author velcrow
+     * @return string
      */
     public static function chr($dec)
     {

@@ -50,6 +50,7 @@ class XMLWriter extends \XMLWriter
      *
      * @param int $pTemporaryStorage Temporary storage location
      * @param string $pTemporaryStorageDir Temporary storage folder
+     * @param bool $compatibility
      */
     public function __construct($pTemporaryStorage = self::STORAGE_MEMORY, $pTemporaryStorageDir = null, $compatibility = false)
     {
