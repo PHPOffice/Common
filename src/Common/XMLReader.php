@@ -54,6 +54,12 @@ class XMLReader
         $zip = new \ZipArchive();
         $zip->open($zipFile);
         $content = $zip->getFromName($xmlFile);
+
+        // Files downloaded from Sharepoint are somehow different and fail on the leading slash.
+        if ($content === false && substr($xmlFile, 0, 1) === '/') {
+            $content = $zip->getFromName(substr($xmlFile, 1));
+        }
+
         $zip->close();
 
         if ($content === false) {
