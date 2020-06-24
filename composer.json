@@ -24,7 +24,7 @@
         "phpmd/phpmd": "2.*",
         "sebastian/phpcpd": "2.*",
         "phploc/phploc": "2.*",
-        "squizlabs/php_codesniffer": "2.*"
+        "squizlabs/php_codesniffer": "2.* || 3.*"
     },
     "autoload": {
         "psr-4": {
