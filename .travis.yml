@@ -1,6 +1,9 @@
 language: php
 
+dist: xenial
+
 php:
+  - 5.3
   - 5.4
   - 5.5
   - 5.6
@@ -8,13 +11,27 @@ php:
   - 7.1
   - 7.2
   - 7.3
+  - 7.4
   - hhvm
   - nightly
 
 matrix:
   include:
+    - php: 5.3
+      dist: precise
+    - php: 5.4
+      dist: trusty
+    - php: 5.5
+      dist: trusty
     - php: nightly
       env: DEPENDENCIES="--ignore-platform-reqs"
+  exclude:
+    - php: 5.3
+      dist: xenial
+    - php: 5.4
+      dist: xenial
+    - php: 5.5
+      dist: xenial
   allow_failures:
     - php: 7.1
     - php: 7.2
