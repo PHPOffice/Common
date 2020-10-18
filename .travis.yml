@@ -22,6 +22,8 @@ matrix:
       dist: trusty
     - php: 5.5
       dist: trusty
+    - php: 7.0
+      env: COVERAGE=1
     - php: nightly
       env: DEPENDENCIES="--ignore-platform-reqs"
   exclude:
@@ -45,6 +47,8 @@ before_install:
   - sudo apt-get install -y graphviz
 
 before_script:
+  ## Deactivate xdebug if we don't do code coverage
+  - if [ -z "$COVERAGE" ]; then phpenv config-rm xdebug.ini || echo "xdebug not available" ; fi
   ## Composer
   - composer self-update
   ## Composer in PHP versions 5.x requires 3 GB memory
@@ -56,17 +60,17 @@ before_script:
 
 script:
   ## PHP_CodeSniffer
-  - ./vendor/bin/phpcs src/ tests/ --standard=PSR2 -n
+  - if [ -z "$COVERAGE" ]; then ./vendor/bin/phpcs src/ tests/ --standard=PSR2 -n ; fi
   ## PHP Copy/Paste Detector
   # - ./vendor/bin/phpcpd src/
   ## PHP Mess Detector
-  - ./vendor/bin/phpmd src/,tests/ text ./phpmd.xml.dist
+  - if [ -z "$COVERAGE" ]; then ./vendor/bin/phpmd src/,tests/ text ./phpmd.xml.dist ; fi
   ## PHPUnit
-  - ./vendor/bin/phpunit -c ./ --coverage-text --coverage-html ./build/coverage
+  - ./vendor/bin/phpunit -c ./ $(if [ -n "$COVERAGE" ]; then echo --coverage-text --coverage-html ./build/coverage; else echo --no-coverage; fi)
   ## PHPLOC
-  - ./vendor/bin/phploc src/
+  - if [ -z "$COVERAGE" ]; then ./vendor/bin/phploc src/ ; fi
   ## PHPDocumentor
-  - ./vendor/bin/phpdoc -q -d ./src -t ./build/docs --template="responsive-twig"
+  - if [ -z "$COVERAGE" ]; then ./vendor/bin/phpdoc -q -d ./src -t ./build/docs --template="responsive-twig" ; fi
 
 after_script:
   ## PHPDocumentor
