@@ -52,7 +52,8 @@ abstract class AbstractZipAdapterTest extends \PHPUnit\Framework\TestCase
 
         $adapter = $this->createAdapter();
         $adapter->open($this->zipTest);
-        $this->assertSame($adapter, $adapter->addFromString($expectedPath, $expectedContent));
+        // pclzip/pclzip library trow notice/warning in PHP 7.1+, issue: https://github.com/ivanlanin/pclzip/pull/8
+        @$this->assertSame($adapter, $adapter->addFromString($expectedPath, $expectedContent));
         $adapter->close();
 
         $this->assertTrue(TestHelperZip::assertFileExists($this->zipTest, $expectedPath));
