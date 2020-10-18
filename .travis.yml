@@ -3,7 +3,6 @@ language: php
 dist: xenial
 
 php:
-  - 5.3
   - 5.4
   - 5.5
   - 5.6
@@ -17,8 +16,6 @@ php:
 
 matrix:
   include:
-    - php: 5.3
-      dist: precise
     - php: 5.4
       dist: trusty
     - php: 5.5
@@ -26,8 +23,6 @@ matrix:
     - php: nightly
       env: DEPENDENCIES="--ignore-platform-reqs"
   exclude:
-    - php: 5.3
-      dist: xenial
     - php: 5.4
       dist: xenial
     - php: 5.5
@@ -43,13 +38,16 @@ env:
     global:
     ##    - secure: "LtlUOzC8FtqgbqUTmU7EU281NSCb58UFdvnz8lelNIDltBdP4eayN/TsgNIePB4jXg2d2R56ZA6j/grhE/md6jdUkulV355H3GrH/hIZmmQ+F9+87agnwLzb9+MJbqXoiE7VvjY3zGIO09G897SUfsfu6JWEcscYFlsH6KcXM6M="
 
-before_script:
+before_install:
   ## Packages
-  - sudo apt-get -qq update > /dev/null
-  - sudo apt-get -qq install graphviz > /dev/null
+  - sudo rm -f /etc/apt/sources.list.d/mongodb.list  # Makes apt crash on Precise, and we don't need MongoDB
+  - sudo apt-get update -qq
+  - sudo apt-get install -y graphviz
+
+before_script:
   ## Composer
   - composer self-update
-  - composer install --prefer-source --dev
+  - travis_wait composer install --prefer-source --dev $(if [ -n "$DEPENDENCIES" ]; then echo $DEPENDENCIES; fi)
   ## PHPDocumentor
   - mkdir -p build/docs
   - mkdir -p build/coverage
