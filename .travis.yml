@@ -11,7 +11,6 @@ php:
   - 7.2
   - 7.3
   - 7.4
-  - hhvm
   - nightly
 
 matrix:
@@ -31,7 +30,6 @@ matrix:
     - php: 7.1
     - php: 7.2
     - php: 7.3
-    - php: hhvm
     - php: nightly
 
 env:
