@@ -69,7 +69,7 @@ class XMLReader
      * @param bool $value
      * @return bool
      */
-    public static function libxml_disable($value)
+    public static function libxmlDisable($value)
     {
         return version_compare(PHP_VERSION, '8') < 0 && libxml_disable_entity_loader($value);
     }
@@ -82,10 +82,10 @@ class XMLReader
      */
     public function getDomFromString($content)
     {
-        $originalLibXMLEntityValue = self::libxml_disable(true);
+        $originalLibXMLEntityValue = self::libxmlDisable(true);
         $this->dom = new \DOMDocument();
         $this->dom->loadXML($content);
-        self::libxml_disable($originalLibXMLEntityValue);
+        self::libxmlDisable($originalLibXMLEntityValue);
 
         return $this->dom;
     }
