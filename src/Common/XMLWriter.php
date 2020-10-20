@@ -86,7 +86,7 @@ class XMLWriter extends \XMLWriter
         if (empty($this->tempFileName)) {
             return;
         }
-        if (PHP_OS != 'WINNT' && @unlink($this->tempFileName) === false) {
+        if ((version_compare(PHP_VERSION, '7.3') >= 0 || PHP_OS != 'WINNT') && @unlink($this->tempFileName) === false) {
             throw new \Exception('The file '.$this->tempFileName.' could not be deleted.');
         }
     }
@@ -166,18 +166,5 @@ class XMLWriter extends \XMLWriter
         if ($condition == true) {
             $this->writeAttribute($attribute, $value);
         }
-    }
-
-    /**
-     * @param string $name
-     * @param mixed $value
-     * @return bool
-     */
-    public function writeAttribute($name, $value)
-    {
-        if (is_float($value)) {
-            $value = json_encode($value);
-        }
-        return parent::writeAttribute($name, $value);
     }
 }

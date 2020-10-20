@@ -58,10 +58,14 @@ class XMLReaderTest extends \PHPUnit\Framework\TestCase
     /**
      * Test that read from non existing archive throws exception
      *
-     * @expectedException Exception
      */
     public function testThrowsExceptionOnNonExistingArchive()
     {
+        if (method_exists($this, 'expectException')) {
+            $this->expectException('Exception');
+        } else {
+            $this->setExpectedException('Exception');
+        }
         $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR;
 
         $reader = new XMLReader();
@@ -125,10 +129,14 @@ class XMLReaderTest extends \PHPUnit\Framework\TestCase
     /**
      * Test that xpath fails if custom namespace is not registered
      *
-     * @expectedException InvalidArgumentException
      */
     public function testShouldThowExceptionIfTryingToRegisterNamespaceBeforeReadingDoc()
     {
+        if (method_exists($this, 'expectException')) {
+            $this->expectException('InvalidArgumentException');
+        } else {
+            $this->setExpectedException('InvalidArgumentException');
+        }
         $reader = new XMLReader();
         $reader->registerNamespace('test', 'http://phpword.com/my/custom/namespace');
     }

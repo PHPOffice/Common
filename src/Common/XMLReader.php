@@ -64,6 +64,17 @@ class XMLReader
     }
 
     /**
+     * Call libxml_disable_entity_loader, but only for PHP < 8
+     *
+     * @param bool $value
+     * @return bool
+     */
+    public static function libxml_disable($value)
+    {
+        return version_compare(PHP_VERSION, '8') < 0 && libxml_disable_entity_loader($value);
+    }
+
+    /**
      * Get DOMDocument from content string
      *
      * @param string $content
@@ -71,10 +82,10 @@ class XMLReader
      */
     public function getDomFromString($content)
     {
-        $originalLibXMLEntityValue = libxml_disable_entity_loader(true);
+        $originalLibXMLEntityValue = self::libxml_disable(true);
         $this->dom = new \DOMDocument();
         $this->dom->loadXML($content);
-        libxml_disable_entity_loader($originalLibXMLEntityValue);
+        self::libxml_disable($originalLibXMLEntityValue);
 
         return $this->dom;
     }
