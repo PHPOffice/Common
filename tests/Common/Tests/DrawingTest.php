@@ -68,9 +68,9 @@ class DrawingTest extends \PHPUnit\Framework\TestCase
         $value = rand(1, 100);
 
         $this->assertEquals(0, Drawing::pixelsToPoints());
-        $this->assertEquals($value*0.67777777, Drawing::pixelsToPoints($value));
+        $this->assertEquals($value*0.75, Drawing::pixelsToPoints($value));
         $this->assertEquals(0, Drawing::pointsToPixels());
-        $this->assertEquals($value* 1.333333333, Drawing::pointsToPixels($value));
+        $this->assertEquals($value/ 0.75, Drawing::pointsToPixels($value));
     }
 
     /**
@@ -80,7 +80,7 @@ class DrawingTest extends \PHPUnit\Framework\TestCase
         $value = rand(1, 100);
 
         $this->assertEquals(0, Drawing::pointsToCentimeters());
-        $this->assertEquals($value * 1.333333333 / Drawing::DPI_96 * 2.54, Drawing::pointsToCentimeters($value));
+        $this->assertEquals($value / 0.75 / Drawing::DPI_96 * 2.54, Drawing::pointsToCentimeters($value));
     }
 
     /**
@@ -105,7 +105,7 @@ class DrawingTest extends \PHPUnit\Framework\TestCase
 
         // Pixels
         $this->assertEquals(0, Drawing::twipsToPixels());
-        $this->assertEquals(round($value / 15.873984), Drawing::twipsToPixels($value));
+        $this->assertEquals(round($value / 15), Drawing::twipsToPixels($value));
     }
 
     public function testHTML()
