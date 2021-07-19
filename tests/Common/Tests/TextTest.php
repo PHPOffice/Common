@@ -9,7 +9,8 @@
  * file that was distributed with this source code. For the full list of
  * contributors, visit https://github.com/PHPOffice/Common/contributors.
  *
- * @link        https://github.com/PHPOffice/Common
+ * @see        https://github.com/PHPOffice/Common
+ *
  * @copyright   2009-2016 PHPOffice Common contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
@@ -21,12 +22,10 @@ use PhpOffice\Common\Text;
 /**
  * Test class for Text
  *
- * @coversDefaultClass PhpOffice\Common\Text
+ * @coversDefaultClass \PhpOffice\Common\Text
  */
 class TextTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     */
     public function testControlCharacters()
     {
         $this->assertEquals('', Text::controlCharacterPHP2OOXML());
@@ -34,7 +33,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('àéîöù', Text::controlCharacterPHP2OOXML('àéîöù'));
 
         $value = rand(0, 8);
-        $this->assertEquals('_x'.sprintf('%04s', strtoupper(dechex($value))).'_', Text::controlCharacterPHP2OOXML(chr($value)));
+        $this->assertEquals('_x' . sprintf('%04s', strtoupper(dechex($value))) . '_', Text::controlCharacterPHP2OOXML(chr($value)));
 
         $this->assertEquals('', Text::controlCharacterOOXML2PHP(''));
         $this->assertEquals(chr(0x08), Text::controlCharacterOOXML2PHP('_x0008_'));
@@ -59,6 +58,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('🌃', Text::chr(0x1F303));
         $this->assertEquals('', Text::chr(2097152));
     }
+
     /**
      * Is UTF8
      */

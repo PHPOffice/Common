@@ -9,7 +9,8 @@
  * file that was distributed with this source code. For the full list of
  * contributors, visit https://github.com/PHPOffice/Common/contributors.
  *
- * @link        https://github.com/PHPOffice/Common
+ * @see        https://github.com/PHPOffice/Common
+ *
  * @copyright   2009-2016 PHPOffice Common contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
@@ -30,7 +31,7 @@ class AutoloaderTest extends \PHPUnit\Framework\TestCase
     {
         Autoloader::register();
         $this->assertContains(
-            array('PhpOffice\\Common\\Autoloader', 'autoload'),
+            ['PhpOffice\\Common\\Autoloader', 'autoload'],
             spl_autoload_functions()
         );
     }

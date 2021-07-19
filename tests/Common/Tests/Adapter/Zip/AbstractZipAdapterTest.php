@@ -10,6 +10,7 @@ abstract class AbstractZipAdapterTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Returns a new instance of the adapter to test
+     *
      * @return \PhpOffice\Common\Adapter\Zip\ZipInterface
      */
     abstract protected function createAdapter();
@@ -18,9 +19,9 @@ abstract class AbstractZipAdapterTest extends \PHPUnit\Framework\TestCase
     {
         parent::setUp();
 
-        $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR;
+        $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
         $this->zipTest = tempnam(sys_get_temp_dir(), 'PhpOfficeCommon');
-        copy($pathResources.'Sample_01_Simple.pptx', $this->zipTest);
+        copy($pathResources . 'Sample_01_Simple.pptx', $this->zipTest);
     }
 
     public function tearDown()

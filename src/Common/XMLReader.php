@@ -9,7 +9,8 @@
  * file that was distributed with this source code. For the full list of
  * contributors, visit https://github.com/PHPOffice/Common/contributors.
  *
- * @link        https://github.com/PHPOffice/Common
+ * @see        https://github.com/PHPOffice/Common
+ *
  * @copyright   2009-2016 PHPOffice Common contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
@@ -42,7 +43,9 @@ class XMLReader
      *
      * @param string $zipFile
      * @param string $xmlFile
+     *
      * @return \DOMDocument|false
+     *
      * @throws \Exception
      */
     public function getDomFromZip($zipFile, $xmlFile)
@@ -67,6 +70,7 @@ class XMLReader
      * Get DOMDocument from content string
      *
      * @param string $content
+     *
      * @return \DOMDocument
      */
     public function getDomFromString($content)
@@ -84,12 +88,13 @@ class XMLReader
      *
      * @param string $path
      * @param \DOMElement $contextNode
+     *
      * @return \DOMNodeList
      */
     public function getElements($path, \DOMElement $contextNode = null)
     {
         if ($this->dom === null) {
-            return array();
+            return [];
         }
         if ($this->xpath === null) {
             $this->xpath = new \DOMXpath($this->dom);
@@ -107,7 +112,9 @@ class XMLReader
      *
      * @param string $prefix The prefix
      * @param string $namespaceURI The URI of the namespace
+     *
      * @return bool true on success or false on failure
+     *
      * @throws \InvalidArgumentException If called before having loaded the DOM document
      */
     public function registerNamespace($prefix, $namespaceURI)
@@ -118,6 +125,7 @@ class XMLReader
         if ($this->xpath === null) {
             $this->xpath = new \DOMXpath($this->dom);
         }
+
         return $this->xpath->registerNamespace($prefix, $namespaceURI);
     }
 
@@ -126,6 +134,7 @@ class XMLReader
      *
      * @param string $path
      * @param \DOMElement $contextNode
+     *
      * @return \DOMElement|null
      */
     public function getElement($path, \DOMElement $contextNode = null)
@@ -144,6 +153,7 @@ class XMLReader
      * @param string $attribute
      * @param \DOMElement $contextNode
      * @param string $path
+     *
      * @return string|null
      */
     public function getAttribute($attribute, \DOMElement $contextNode = null, $path = null)
@@ -170,6 +180,7 @@ class XMLReader
      *
      * @param string $path
      * @param \DOMElement $contextNode
+     *
      * @return string|null
      */
     public function getValue($path, \DOMElement $contextNode = null)
@@ -187,7 +198,8 @@ class XMLReader
      *
      * @param string $path
      * @param \DOMElement $contextNode
-     * @return integer
+     *
+     * @return int
      */
     public function countElements($path, \DOMElement $contextNode = null)
     {
@@ -201,7 +213,8 @@ class XMLReader
      *
      * @param string $path
      * @param \DOMElement $contextNode
-     * @return boolean
+     *
+     * @return bool
      */
     public function elementExists($path, \DOMElement $contextNode = null)
     {

@@ -9,7 +9,8 @@
  * file that was distributed with this source code. For the full list of
  * contributors, visit https://github.com/PHPOffice/Common/contributors.
  *
- * @link        https://github.com/PHPOffice/Common
+ * @see        https://github.com/PHPOffice/Common
+ *
  * @copyright   2009-2016 PHPOffice Common contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
@@ -21,12 +22,10 @@ use PhpOffice\Common\Font;
 /**
  * Test class for Font
  *
- * @coversDefaultClass PhpOffice\Common\Font
+ * @coversDefaultClass \PhpOffice\Common\Font
  */
 class FontTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     */
     public function testMath()
     {
         $value = rand(1, 100);

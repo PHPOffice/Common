@@ -9,7 +9,8 @@
  * file that was distributed with this source code. For the full list of
  * contributors, visit https://github.com/PHPOffice/Common/contributors.
  *
- * @link        https://github.com/PHPOffice/Common
+ * @see        https://github.com/PHPOffice/Common
+ *
  * @copyright   2009-2017 PHPOffice Common contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
@@ -21,7 +22,7 @@ use PhpOffice\Common\XMLReader;
 /**
  * Test class for XMLReader
  *
- * @coversDefaultClass PhpOffice\Common\XMLReader
+ * @coversDefaultClass \PhpOffice\Common\XMLReader
  */
 class XMLReaderTest extends \PHPUnit\Framework\TestCase
 {
@@ -45,27 +46,27 @@ class XMLReaderTest extends \PHPUnit\Framework\TestCase
      */
     public function testDomFromZip()
     {
-        $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR;
+        $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
 
         $reader = new XMLReader();
-        $reader->getDomFromZip($pathResources. 'reader.zip', 'test.xml');
+        $reader->getDomFromZip($pathResources . 'reader.zip', 'test.xml');
 
         $this->assertTrue($reader->elementExists('/element/child'));
 
-        $this->assertFalse($reader->getDomFromZip($pathResources. 'reader.zip', 'non_existing_xml_file.xml'));
+        $this->assertFalse($reader->getDomFromZip($pathResources . 'reader.zip', 'non_existing_xml_file.xml'));
     }
 
     /**
      * Test that read from non existing archive throws exception
      *
-     * @expectedException Exception
+     * @expectedException \Exception
      */
     public function testThrowsExceptionOnNonExistingArchive()
     {
-        $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR;
+        $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
 
         $reader = new XMLReader();
-        $reader->getDomFromZip($pathResources. 'readers.zip', 'test.xml');
+        $reader->getDomFromZip($pathResources . 'readers.zip', 'test.xml');
     }
 
     /**
@@ -125,7 +126,7 @@ class XMLReaderTest extends \PHPUnit\Framework\TestCase
     /**
      * Test that xpath fails if custom namespace is not registered
      *
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testShouldThowExceptionIfTryingToRegisterNamespaceBeforeReadingDoc()
     {

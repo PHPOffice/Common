@@ -9,7 +9,8 @@
  * file that was distributed with this source code. For the full list of
  * contributors, visit https://github.com/PHPOffice/Common/contributors.
  *
- * @link        https://github.com/PHPOffice/Common
+ * @see        https://github.com/PHPOffice/Common
+ *
  * @copyright   2009-2016 PHPOffice Common contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
@@ -21,27 +22,25 @@ use PhpOffice\Common\XMLWriter;
 /**
  * Test class for XMLWriter
  *
- * @coversDefaultClass PhpOffice\Common\XMLWriter
+ * @coversDefaultClass \PhpOffice\Common\XMLWriter
  */
 class XMLWriterTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     */
     public function testConstruct()
     {
         // Memory
         $object = new XMLWriter();
         $object->startElement('element');
-            $object->text('AAA');
+        $object->text('AAA');
         $object->endElement();
-        $this->assertEquals('<element>AAA</element>'.chr(10), $object->getData());
+        $this->assertEquals('<element>AAA</element>' . chr(10), $object->getData());
 
         // Disk
         $object = new XMLWriter(XMLWriter::STORAGE_DISK);
         $object->startElement('element');
-            $object->text('BBB');
+        $object->text('BBB');
         $object->endElement();
-        $this->assertEquals('<element>BBB</element>'.chr(10), $object->getData());
+        $this->assertEquals('<element>BBB</element>' . chr(10), $object->getData());
     }
 
     public function testWriteAttribute()
@@ -65,7 +64,7 @@ class XMLWriterTest extends \PHPUnit\Framework\TestCase
 
         setlocale(LC_NUMERIC, 'de_DE.UTF-8', 'de');
 
-        $this->assertSame('1,2', (string)$value);
+        $this->assertSame('1,2', (string) $value);
         $this->assertSame('<element name="1.2"/>' . chr(10), $xmlWriter->getData());
     }
 }

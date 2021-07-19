@@ -23,3 +23,5 @@ vendor
 /samples/Github_*.*
 /samples/#83/*.lnk
 /composer.lock
+
+/.php-cs-fixer.cache

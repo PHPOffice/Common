@@ -10,7 +10,8 @@
  * file that was distributed with this source code. For the full list of
  * contributors, visit https://github.com/PHPOffice/PHPPowerPoint/contributors.
  *
- * @link        https://github.com/PHPOffice/PHPPowerPoint
+ * @see        https://github.com/PHPOffice/PHPPowerPoint
+ *
  * @copyright   2010-2016 PHPPowerPoint contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
@@ -25,7 +26,7 @@ class XmlDocument
     /**
      * Path
      *
-     * @var string $path
+     * @var string
      */
     private $path;
 
@@ -64,6 +65,7 @@ class XmlDocument
      * Get DOM from file
      *
      * @param string $file
+     *
      * @return \DOMDocument
      */
     public function getFileDom($file = 'word/document.xml')
@@ -78,6 +80,7 @@ class XmlDocument
         $file = $this->path . '/' . $file;
         $this->dom = new \DOMDocument();
         $this->dom->load($file);
+
         return $this->dom;
     }
 
@@ -86,6 +89,7 @@ class XmlDocument
      *
      * @param string $path
      * @param string $file
+     *
      * @return \DOMNodeList
      */
     public function getNodeList($path, $file = 'word/document.xml')
@@ -106,11 +110,13 @@ class XmlDocument
      *
      * @param string $path
      * @param string $file
+     *
      * @return \DOMElement
      */
     public function getElement($path, $file = 'word/document.xml')
     {
         $elements = $this->getNodeList($path, $file);
+
         return $elements->item(0);
     }
 
@@ -137,10 +143,11 @@ class XmlDocument
     /**
      * Get element attribute
      *
-     * @param   string  $path
-     * @param   string  $attribute
-     * @param   string  $file
-     * @return  string
+     * @param string $path
+     * @param string $attribute
+     * @param string $file
+     *
+     * @return string
      */
     public function getElementAttribute($path, $attribute, $file = 'word/document.xml')
     {
@@ -150,10 +157,11 @@ class XmlDocument
     /**
      * Get element attribute
      *
-     * @param   string  $path
-     * @param   string  $attribute
-     * @param   string  $file
-     * @return  string
+     * @param string $path
+     * @param string $attribute
+     * @param string $file
+     *
+     * @return string
      */
     public function attributeElementExists($path, $attribute, $file = 'word/document.xml')
     {
@@ -163,13 +171,15 @@ class XmlDocument
     /**
      * Check if element exists
      *
-     * @param   string  $path
-     * @param   string  $file
-     * @return  string
+     * @param string $path
+     * @param string $file
+     *
+     * @return string
      */
     public function elementExists($path, $file = 'word/document.xml')
     {
         $nodeList = $this->getNodeList($path, $file);
+
         return !($nodeList->length == 0);
     }
 }
