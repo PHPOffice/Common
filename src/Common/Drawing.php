@@ -9,27 +9,26 @@
  * file that was distributed with this source code. For the full list of
  * contributors, visit https://github.com/PHPOffice/PHPWord/contributors.
  *
- * @link        https://github.com/PHPOffice/Common
+ * @see        https://github.com/PHPOffice/Common
+ *
  * @copyright   2009-2016 PHPOffice Common contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
 
 namespace PhpOffice\Common;
 
-/**
- * \PhpOffice\Common\Drawing
- */
 class Drawing
 {
-    const DPI_96 = 96;
+    public const DPI_96 = 96;
 
     /**
      * Convert pixels to EMU
      *
-     * @param  int $pValue Value in pixels
-     * @return int
+     * @param int $pValue Value in pixels
+     *
+     * @return float
      */
-    public static function pixelsToEmu($pValue = 0)
+    public static function pixelsToEmu(int $pValue = 0): float
     {
         return round($pValue * 9525);
     }
@@ -37,24 +36,27 @@ class Drawing
     /**
      * Convert EMU to pixels
      *
-     * @param  int $pValue Value in EMU
-     * @return int
+     * @param int $pValue Value in EMU
+     *
+     * @return float
      */
-    public static function emuToPixels($pValue = 0)
+    public static function emuToPixels(int $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
         }
+
         return round($pValue / 9525);
     }
 
     /**
      * Convert pixels to points
      *
-     * @param  int $pValue Value in pixels
+     * @param int $pValue Value in pixels
+     *
      * @return float
      */
-    public static function pixelsToPoints($pValue = 0)
+    public static function pixelsToPoints(int $pValue = 0): float
     {
         return $pValue * 0.67777777;
     }
@@ -62,64 +64,72 @@ class Drawing
     /**
      * Convert points width to centimeters
      *
-     * @param  int $pValue Value in points
+     * @param int $pValue Value in points
+     *
      * @return float
      */
-    public static function pointsToCentimeters($pValue = 0)
+    public static function pointsToCentimeters(int $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
         }
-        return ((($pValue * 1.333333333) / self::DPI_96) * 2.54);
+
+        return (($pValue * 1.333333333) / self::DPI_96) * 2.54;
     }
-    
+
     /**
      * Convert points width to pixels
      *
-     * @param  int $pValue Value in points
+     * @param int $pValue Value in points
+     *
      * @return float
      */
-    public static function pointsToPixels($pValue = 0)
+    public static function pointsToPixels(int $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
         }
+
         return $pValue * 1.333333333;
     }
 
     /**
      * Convert pixels to centimeters
      *
-     * @param  int $pValue Value in pixels
+     * @param int $pValue Value in pixels
+     *
      * @return float
      */
-    public static function pixelsToCentimeters($pValue = 0)
+    public static function pixelsToCentimeters(int $pValue = 0): float
     {
         //return $pValue * 0.028;
-        return (($pValue / self::DPI_96) * 2.54);
+        return ($pValue / self::DPI_96) * 2.54;
     }
 
     /**
      * Convert centimeters width to pixels
      *
-     * @param  int $pValue Value in centimeters
+     * @param int $pValue Value in centimeters
+     *
      * @return float
      */
-    public static function centimetersToPixels($pValue = 0)
+    public static function centimetersToPixels(int $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
         }
+
         return ($pValue / 2.54) * self::DPI_96;
     }
 
     /**
      * Convert degrees to angle
      *
-     * @param  int $pValue Degrees
+     * @param int $pValue Degrees
+     *
      * @return int
      */
-    public static function degreesToAngle($pValue = 0)
+    public static function degreesToAngle(int $pValue = 0): int
     {
         return (int) round($pValue * 60000);
     }
@@ -127,84 +137,96 @@ class Drawing
     /**
      * Convert angle to degrees
      *
-     * @param  int $pValue Angle
-     * @return int
+     * @param int $pValue Angle
+     *
+     * @return float
      */
-    public static function angleToDegrees($pValue = 0)
+    public static function angleToDegrees(int $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
         }
+
         return round($pValue / 60000);
     }
 
     /**
      * Convert centimeters width to twips
      *
-     * @param integer $pValue
+     * @param int $pValue
+     *
      * @return float
      */
-    public static function centimetersToTwips($pValue = 0)
+    public static function centimetersToTwips(int $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
         }
+
         return $pValue * 566.928;
     }
 
     /**
      * Convert twips width to centimeters
      *
-     * @param integer $pValue
+     * @param int $pValue
+     *
      * @return float
      */
-    public static function twipsToCentimeters($pValue = 0)
+    public static function twipsToCentimeters(int $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
         }
+
         return $pValue / 566.928;
     }
 
     /**
      * Convert inches width to twips
      *
-     * @param integer $pValue
-     * @return float
+     * @param int $pValue
+     *
+     * @return int
      */
-    public static function inchesToTwips($pValue = 0)
+    public static function inchesToTwips(int $pValue = 0): int
     {
         if ($pValue == 0) {
             return 0;
         }
+
         return $pValue * 1440;
     }
 
     /**
      * Convert twips width to inches
      *
-     * @param integer $pValue
+     * @param int $pValue
+     *
      * @return float
      */
-    public static function twipsToInches($pValue = 0)
+    public static function twipsToInches(int $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
         }
+
         return $pValue / 1440;
     }
 
     /**
      * Convert twips width to pixels
      *
-     * @param integer $pValue
+     * @param int $pValue
+     *
      * @return float
      */
-    public static function twipsToPixels($pValue = 0)
+    public static function twipsToPixels(int $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
         }
+
         return round($pValue / 15.873984);
     }
 
@@ -212,26 +234,27 @@ class Drawing
      * Convert HTML hexadecimal to RGB
      *
      * @param string $pValue HTML Color in hexadecimal
-     * @return array|false Value in RGB
+     *
+     * @return array<int, int>|null Value in RGB
      */
-    public static function htmlToRGB($pValue)
+    public static function htmlToRGB(string $pValue): ?array
     {
         if ($pValue[0] == '#') {
             $pValue = substr($pValue, 1);
         }
 
         if (strlen($pValue) == 6) {
-            list($colorR, $colorG, $colorB) = array($pValue[0] . $pValue[1], $pValue[2] . $pValue[3], $pValue[4] . $pValue[5]);
+            list($colorR, $colorG, $colorB) = [$pValue[0] . $pValue[1], $pValue[2] . $pValue[3], $pValue[4] . $pValue[5]];
         } elseif (strlen($pValue) == 3) {
-            list($colorR, $colorG, $colorB) = array($pValue[0] . $pValue[0], $pValue[1] . $pValue[1], $pValue[2] . $pValue[2]);
+            list($colorR, $colorG, $colorB) = [$pValue[0] . $pValue[0], $pValue[1] . $pValue[1], $pValue[2] . $pValue[2]];
         } else {
-            return false;
+            return null;
         }
 
         $colorR = hexdec($colorR);
         $colorG = hexdec($colorG);
         $colorB = hexdec($colorB);
 
-        return array($colorR, $colorG, $colorB);
+        return [$colorR, $colorG, $colorB];
     }
 }

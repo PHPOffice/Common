@@ -9,7 +9,8 @@
  * file that was distributed with this source code. For the full list of
  * contributors, visit https://github.com/PHPOffice/PHPWord/contributors.
  *
- * @link        https://github.com/PHPOffice/Common
+ * @see        https://github.com/PHPOffice/Common
+ *
  * @copyright   2009-2016 PHPOffice Common contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
@@ -24,7 +25,8 @@ class File
     /**
      * Verify if a file exists
      *
-     * @param  string $pFilename Filename
+     * @param string $pFilename Filename
+     *
      * @return bool
      */
     public static function fileExists($pFilename)
@@ -34,7 +36,7 @@ class File
         // doing the original file_exists on ZIP archives...
         if (strtolower(substr($pFilename, 0, 3)) == 'zip') {
             // Open ZIP file and verify if the file exists
-            $zipFile     = substr($pFilename, 6, strpos($pFilename, '#') - 6);
+            $zipFile = substr($pFilename, 6, strpos($pFilename, '#') - 6);
             $archiveFile = substr($pFilename, strpos($pFilename, '#') + 1);
 
             $zip = new \ZipArchive();
@@ -51,29 +53,33 @@ class File
         // Regular file_exists
         return file_exists($pFilename);
     }
+
     /**
      * Returns the content of a file
      *
-     * @param  string $pFilename Filename
-     * @return string
+     * @param string $pFilename Filename
+     *
+     * @return string|null
      */
-    public static function fileGetContents($pFilename)
+    public static function fileGetContents(string $pFilename): ?string
     {
         if (!self::fileExists($pFilename)) {
-            return false;
+            return null;
         }
         if (strtolower(substr($pFilename, 0, 3)) == 'zip') {
             // Open ZIP file and verify if the file exists
-            $zipFile     = substr($pFilename, 6, strpos($pFilename, '#') - 6);
+            $zipFile = substr($pFilename, 6, strpos($pFilename, '#') - 6);
             $archiveFile = substr($pFilename, strpos($pFilename, '#') + 1);
 
             $zip = new \ZipArchive();
             if ($zip->open($zipFile) === true) {
                 $returnValue = $zip->getFromName($archiveFile);
                 $zip->close();
+
                 return $returnValue;
             }
-            return false;
+
+            return null;
         }
         // Regular file contents
         return file_get_contents($pFilename);
@@ -82,16 +88,17 @@ class File
     /**
      * Returns canonicalized absolute pathname, also for ZIP archives
      *
-     * @param  string $pFilename
+     * @param string $pFilename
+     *
      * @return string
      */
-    public static function realpath($pFilename)
+    public static function realpath(string $pFilename): string
     {
         // Try using realpath()
         $returnValue = realpath($pFilename);
 
         // Found something?
-        if ($returnValue == '' || is_null($returnValue)) {
+        if (empty($returnValue)) {
             $pathArray = explode('/', $pFilename);
             while (in_array('..', $pathArray) && $pathArray[0] != '..') {
                 $numPathArray = count($pathArray);

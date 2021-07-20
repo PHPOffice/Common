@@ -2,28 +2,33 @@
 
 namespace Common\Tests\Adapter\Zip;
 
+use PhpOffice\Common\Adapter\Zip\ZipInterface;
 use PhpOffice\Common\Tests\TestHelperZip;
 
 abstract class AbstractZipAdapterTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @var string
+     */
     protected $zipTest;
 
     /**
      * Returns a new instance of the adapter to test
+     *
      * @return \PhpOffice\Common\Adapter\Zip\ZipInterface
      */
-    abstract protected function createAdapter();
+    abstract protected function createAdapter(): ZipInterface;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
-        $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR;
+        $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
         $this->zipTest = tempnam(sys_get_temp_dir(), 'PhpOfficeCommon');
-        copy($pathResources.'Sample_01_Simple.pptx', $this->zipTest);
+        copy($pathResources . 'Sample_01_Simple.pptx', $this->zipTest);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
 
@@ -32,20 +37,20 @@ abstract class AbstractZipAdapterTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testOpen()
+    public function testOpen(): void
     {
         $adapter = $this->createAdapter();
         $this->assertSame($adapter, $adapter->open($this->zipTest));
     }
 
-    public function testClose()
+    public function testClose(): void
     {
         $adapter = $this->createAdapter();
         $adapter->open($this->zipTest);
         $this->assertSame($adapter, $adapter->close());
     }
 
-    public function testAddFromString()
+    public function testAddFromString(): void
     {
         $expectedPath = 'file.test';
         $expectedContent = 'Content';

@@ -9,7 +9,8 @@
  * file that was distributed with this source code. For the full list of
  * contributors, visit https://github.com/PHPOffice/Common/contributors.
  *
- * @link        https://github.com/PHPOffice/Common
+ * @see        https://github.com/PHPOffice/Common
+ *
  * @copyright   2009-2016 PHPOffice Common contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
@@ -20,6 +21,7 @@ use PhpOffice\Common\Microsoft\PasswordEncoder;
 
 /**
  * Test class for PhpOffice\Common\PasswordEncoder
+ *
  * @coversDefaultClass \PhpOffice\Common\PasswordEncoder
  */
 class PasswordEncoderTest extends \PHPUnit\Framework\TestCase
@@ -27,7 +29,7 @@ class PasswordEncoderTest extends \PHPUnit\Framework\TestCase
     /**
      * Test that a password can be hashed without specifying any additional parameters
      */
-    public function testEncodePassword()
+    public function testEncodePassword(): void
     {
         //given
         $password = 'test';
@@ -42,7 +44,7 @@ class PasswordEncoderTest extends \PHPUnit\Framework\TestCase
     /**
      * Test that a password can be hashed with a custom salt
      */
-    public function testEncodePasswordWithSalt()
+    public function testEncodePasswordWithSalt(): void
     {
         //given
         $password = 'test';
@@ -58,7 +60,7 @@ class PasswordEncoderTest extends \PHPUnit\Framework\TestCase
     /**
      * Test that the encoder falls back on SHA-1 if a non supported algorithm is given
      */
-    public function testDefaultsToSha1IfUnsupportedAlgorithm()
+    public function testDefaultsToSha1IfUnsupportedAlgorithm(): void
     {
         //given
         $password = 'test';
@@ -74,7 +76,7 @@ class PasswordEncoderTest extends \PHPUnit\Framework\TestCase
     /**
      * Test that the encoder falls back on SHA-1 if a non supported algorithm is given
      */
-    public function testEncodePasswordWithNullAsciiCodeInPassword()
+    public function testEncodePasswordWithNullAsciiCodeInPassword(): void
     {
         //given
         $password = 'test' . chr(0);
