@@ -155,9 +155,10 @@ class XmlDocument
      *
      * @return string
      */
-    public function getElementAttribute(string $path, string $attribute, string $file = 'word/document.xml'): string 
+    public function getElementAttribute(string $path, string $attribute, string $file = 'word/document.xml'): string
     {
         $element = $this->getElement($path, $file);
+
         return $element instanceof DOMElement ? $element->getAttribute($attribute) : '';
     }
 
@@ -173,6 +174,7 @@ class XmlDocument
     public function attributeElementExists(string $path, string $attribute, string $file = 'word/document.xml'): bool
     {
         $element = $this->getElement($path, $file);
+
         return $element instanceof DOMElement ? $element->hasAttribute($attribute) : false;
     }
 

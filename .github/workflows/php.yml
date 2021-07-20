@@ -78,7 +78,7 @@ jobs:
               coverage: xdebug
 
       -   name: Generate Locale (for tests)
-          run: sudo locale-gen de_DE.UTF-8
+          run: sudo locale-gen de_DE.UTF-8 && sudo update-locale
 
       -   uses: actions/checkout@v2
 

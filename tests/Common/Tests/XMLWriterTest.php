@@ -62,9 +62,15 @@ class XMLWriterTest extends \PHPUnit\Framework\TestCase
         $xmlWriter->writeAttribute('name', $value);
         $xmlWriter->endElement();
 
+        // https://www.php.net/manual/en/language.types.string.php#language.types.string.casting
+        // As of PHP 8.0.0, the decimal point character is always ..
+        // Prior to PHP 8.0.0, the decimal point character is defined in the script's locale (category LC_NUMERIC).
         setlocale(LC_NUMERIC, 'de_DE.UTF-8', 'de');
-
-        $this->assertSame('1,2', (string) $value);
+        if (PHP_VERSION_ID > 80000) {
+            $this->assertSame('1.2', (string) $value);
+        } else {
+            $this->assertSame('1,2', (string) $value);
+        }
         $this->assertSame('<element name="1.2"/>' . chr(10), $xmlWriter->getData());
     }
 }

@@ -39,9 +39,9 @@ class FileTest extends \PHPUnit\Framework\TestCase
     public function testGetFileContents(): void
     {
         $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR;
-        $this->assertInternalType('string', File::fileGetContents($pathResources . 'images' . DIRECTORY_SEPARATOR . 'PHPPowerPointLogo.png'));
+        $this->assertIsString(File::fileGetContents($pathResources . 'images' . DIRECTORY_SEPARATOR . 'PHPPowerPointLogo.png'));
         $this->assertNull(File::fileGetContents($pathResources . 'images' . DIRECTORY_SEPARATOR . 'PHPPowerPointLogo_404.png'));
-        $this->assertInternalType('string', File::fileGetContents('zip://' . $pathResources . 'files' . DIRECTORY_SEPARATOR . 'Sample_01_Simple.pptx#[Content_Types].xml'));
+        $this->assertIsString(File::fileGetContents('zip://' . $pathResources . 'files' . DIRECTORY_SEPARATOR . 'Sample_01_Simple.pptx#[Content_Types].xml'));
         $this->assertNull(File::fileGetContents('zip://' . $pathResources . 'files' . DIRECTORY_SEPARATOR . 'Sample_01_Simple.pptx#404.xml'));
         $this->assertNull(File::fileGetContents('zip://' . $pathResources . 'files' . DIRECTORY_SEPARATOR . '404.pptx#404.xml'));
     }

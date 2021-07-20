@@ -19,7 +19,6 @@ namespace PhpOffice\Common;
 
 use DOMDocument;
 use DOMElement;
-use DOMNode;
 use DOMNodeList;
 use DOMXpath;
 use ZipArchive;
@@ -55,7 +54,7 @@ class XMLReader
      *
      * @throws \Exception
      */
-    public function getDomFromZip($zipFile, $xmlFile)
+    public function getDomFromZip(string $zipFile, string $xmlFile)
     {
         if (file_exists($zipFile) === false) {
             throw new \Exception('Cannot find archive file.');
@@ -80,7 +79,7 @@ class XMLReader
      *
      * @return DOMDocument
      */
-    public function getDomFromString($content)
+    public function getDomFromString(string $content)
     {
         $originalLibXMLEntityValue = libxml_disable_entity_loader(true);
         $this->dom = new DOMDocument();
@@ -101,7 +100,7 @@ class XMLReader
     public function getElements(string $path, DOMElement $contextNode = null)
     {
         if ($this->dom === null) {
-            return new DOMNodeList;
+            return new DOMNodeList();
         }
         if ($this->xpath === null) {
             $this->xpath = new DOMXpath($this->dom);

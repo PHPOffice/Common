@@ -104,7 +104,7 @@ class DrawingTest extends \PHPUnit\Framework\TestCase
         $this->assertNull(Drawing::htmlToRGB('0000'));
         $this->assertNull(Drawing::htmlToRGB('00000'));
 
-        $this->assertInternalType('array', Drawing::htmlToRGB('ABCDEF'));
+        $this->assertIsArray(Drawing::htmlToRGB('ABCDEF'));
         $this->assertCount(3, Drawing::htmlToRGB('ABCDEF'));
         $this->assertEquals([0xAB, 0xCD, 0xEF], Drawing::htmlToRGB('ABCDEF'));
         $this->assertEquals([0xAB, 0xCD, 0xEF], Drawing::htmlToRGB('#ABCDEF'));

@@ -17,14 +17,17 @@
 
 namespace PhpOffice\Common\Tests;
 
+use Exception;
+use InvalidArgumentException;
 use PhpOffice\Common\XMLReader;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test class for XMLReader
  *
  * @coversDefaultClass \PhpOffice\Common\XMLReader
  */
-class XMLReaderTest extends \PHPUnit\Framework\TestCase
+class XMLReaderTest extends TestCase
 {
     /**
      * Test reading XML from string
@@ -58,11 +61,12 @@ class XMLReaderTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Test that read from non existing archive throws exception
-     *
-     * @expectedException \Exception
      */
     public function testThrowsExceptionOnNonExistingArchive(): void
     {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Cannot find archive file.');
+
         $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
 
         $reader = new XMLReader();
@@ -86,7 +90,7 @@ class XMLReaderTest extends \PHPUnit\Framework\TestCase
     public function testReturnNullOnNonExistingNode(): void
     {
         $reader = new XMLReader();
-        $this->assertEmpty($reader->getElements('/element/children'));
+        $this->assertCount(0, $reader->getElements('/element/children'));
         $reader->getDomFromString('<element><child>AAA</child></element>');
 
         $this->assertNull($reader->getElement('/element/children'));
@@ -125,11 +129,12 @@ class XMLReaderTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Test that xpath fails if custom namespace is not registered
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function testShouldThowExceptionIfTryingToRegisterNamespaceBeforeReadingDoc(): void
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Dom needs to be loaded before registering a namespace');
+
         $reader = new XMLReader();
         $reader->registerNamespace('test', 'http://phpword.com/my/custom/namespace');
     }
