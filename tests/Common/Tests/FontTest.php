@@ -26,7 +26,7 @@ use PhpOffice\Common\Font;
  */
 class FontTest extends \PHPUnit\Framework\TestCase
 {
-    public function testMath()
+    public function testMath(): void
     {
         $value = rand(1, 100);
         $this->assertEquals(16, Font::fontSizeToPixels());

@@ -37,7 +37,7 @@ class PasswordEncoder
     /**
      * Mapping between algorithm name and algorithm ID
      *
-     * @var array
+     * @var array<string, array<int, int|string>>
      *
      * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.wordprocessing.writeprotection.cryptographicalgorithmsid(v=office.14).aspx
      */
@@ -55,6 +55,9 @@ class PasswordEncoder
         self::ALGORITHM_SHA_512 => [14, 'sha512'],
     ];
 
+    /**
+     * @var array<int>
+     */
     private static $initialCodeArray = [
         0xE1F0,
         0x1D0F,
@@ -73,6 +76,9 @@ class PasswordEncoder
         0x4EC3,
     ];
 
+    /**
+     * @var array<int, array<int>>
+     */
     private static $encryptionMatrix = [
         [0xAEFC, 0x4DD9, 0x9BB2, 0x2745, 0x4E8A, 0x9D14, 0x2A09],
         [0x7B61, 0xF6C2, 0xFDA5, 0xEB6B, 0xC6F7, 0x9DCF, 0x2BBF],
@@ -91,6 +97,9 @@ class PasswordEncoder
         [0x1021, 0x2042, 0x4084, 0x8108, 0x1231, 0x2462, 0x48C4],
     ];
 
+    /**
+     * @var int
+     */
     private static $passwordMaxLength = 15;
 
     /**
@@ -105,7 +114,7 @@ class PasswordEncoder
      *
      * @return string
      */
-    public static function hashPassword($password, $algorithmName = self::ALGORITHM_SHA_1, $salt = null, $spinCount = 10000)
+    public static function hashPassword(string $password, string $algorithmName = self::ALGORITHM_SHA_1, string $salt = null, int $spinCount = 10000)
     {
         $origEncoding = mb_internal_encoding();
         mb_internal_encoding('UTF-8');
@@ -156,7 +165,7 @@ class PasswordEncoder
      *
      * @return string
      */
-    private static function getAlgorithm($algorithmName)
+    private static function getAlgorithm(string $algorithmName): string
     {
         $algorithm = self::$algorithmMapping[$algorithmName][1];
         if ($algorithm == '') {
@@ -173,7 +182,7 @@ class PasswordEncoder
      *
      * @return int
      */
-    public static function getAlgorithmId($algorithmName)
+    public static function getAlgorithmId(string $algorithmName): int
     {
         return self::$algorithmMapping[$algorithmName][0];
     }
@@ -181,11 +190,11 @@ class PasswordEncoder
     /**
      * Build combined key from low-order word and high-order word
      *
-     * @param array $byteChars byte array representation of password
+     * @param array<int, int> $byteChars byte array representation of password
      *
      * @return int
      */
-    private static function buildCombinedKey($byteChars)
+    private static function buildCombinedKey(array $byteChars): int
     {
         $byteCharsLength = count($byteChars);
         // Compute the high-order word

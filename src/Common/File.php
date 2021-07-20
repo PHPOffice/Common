@@ -59,12 +59,12 @@ class File
      *
      * @param string $pFilename Filename
      *
-     * @return string
+     * @return string|null
      */
-    public static function fileGetContents($pFilename)
+    public static function fileGetContents(string $pFilename): ?string
     {
         if (!self::fileExists($pFilename)) {
-            return false;
+            return null;
         }
         if (strtolower(substr($pFilename, 0, 3)) == 'zip') {
             // Open ZIP file and verify if the file exists
@@ -79,7 +79,7 @@ class File
                 return $returnValue;
             }
 
-            return false;
+            return null;
         }
         // Regular file contents
         return file_get_contents($pFilename);
@@ -92,13 +92,13 @@ class File
      *
      * @return string
      */
-    public static function realpath($pFilename)
+    public static function realpath(string $pFilename): string
     {
         // Try using realpath()
         $returnValue = realpath($pFilename);
 
         // Found something?
-        if ($returnValue == '' || is_null($returnValue)) {
+        if (empty($returnValue)) {
             $pathArray = explode('/', $pFilename);
             while (in_array('..', $pathArray) && $pathArray[0] != '..') {
                 $numPathArray = count($pathArray);

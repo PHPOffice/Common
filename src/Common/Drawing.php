@@ -17,9 +17,6 @@
 
 namespace PhpOffice\Common;
 
-/**
- * \PhpOffice\Common\Drawing
- */
 class Drawing
 {
     public const DPI_96 = 96;
@@ -29,9 +26,9 @@ class Drawing
      *
      * @param int $pValue Value in pixels
      *
-     * @return int
+     * @return float
      */
-    public static function pixelsToEmu($pValue = 0)
+    public static function pixelsToEmu(int $pValue = 0): float
     {
         return round($pValue * 9525);
     }
@@ -41,9 +38,9 @@ class Drawing
      *
      * @param int $pValue Value in EMU
      *
-     * @return int
+     * @return float
      */
-    public static function emuToPixels($pValue = 0)
+    public static function emuToPixels(int $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
@@ -59,7 +56,7 @@ class Drawing
      *
      * @return float
      */
-    public static function pixelsToPoints($pValue = 0)
+    public static function pixelsToPoints(int $pValue = 0): float
     {
         return $pValue * 0.67777777;
     }
@@ -71,7 +68,7 @@ class Drawing
      *
      * @return float
      */
-    public static function pointsToCentimeters($pValue = 0)
+    public static function pointsToCentimeters(int $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
@@ -87,7 +84,7 @@ class Drawing
      *
      * @return float
      */
-    public static function pointsToPixels($pValue = 0)
+    public static function pointsToPixels(int $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
@@ -103,7 +100,7 @@ class Drawing
      *
      * @return float
      */
-    public static function pixelsToCentimeters($pValue = 0)
+    public static function pixelsToCentimeters(int $pValue = 0): float
     {
         //return $pValue * 0.028;
         return ($pValue / self::DPI_96) * 2.54;
@@ -116,7 +113,7 @@ class Drawing
      *
      * @return float
      */
-    public static function centimetersToPixels($pValue = 0)
+    public static function centimetersToPixels(int $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
@@ -132,7 +129,7 @@ class Drawing
      *
      * @return int
      */
-    public static function degreesToAngle($pValue = 0)
+    public static function degreesToAngle(int $pValue = 0): int
     {
         return (int) round($pValue * 60000);
     }
@@ -142,9 +139,9 @@ class Drawing
      *
      * @param int $pValue Angle
      *
-     * @return int
+     * @return float
      */
-    public static function angleToDegrees($pValue = 0)
+    public static function angleToDegrees(int $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
@@ -160,7 +157,7 @@ class Drawing
      *
      * @return float
      */
-    public static function centimetersToTwips($pValue = 0)
+    public static function centimetersToTwips(int $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
@@ -176,7 +173,7 @@ class Drawing
      *
      * @return float
      */
-    public static function twipsToCentimeters($pValue = 0)
+    public static function twipsToCentimeters(int $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
@@ -190,9 +187,9 @@ class Drawing
      *
      * @param int $pValue
      *
-     * @return float
+     * @return int
      */
-    public static function inchesToTwips($pValue = 0)
+    public static function inchesToTwips(int $pValue = 0): int
     {
         if ($pValue == 0) {
             return 0;
@@ -208,7 +205,7 @@ class Drawing
      *
      * @return float
      */
-    public static function twipsToInches($pValue = 0)
+    public static function twipsToInches(int $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
@@ -224,7 +221,7 @@ class Drawing
      *
      * @return float
      */
-    public static function twipsToPixels($pValue = 0)
+    public static function twipsToPixels(int $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
@@ -238,9 +235,9 @@ class Drawing
      *
      * @param string $pValue HTML Color in hexadecimal
      *
-     * @return array|false Value in RGB
+     * @return array<int, int>|null Value in RGB
      */
-    public static function htmlToRGB($pValue)
+    public static function htmlToRGB(string $pValue): ?array
     {
         if ($pValue[0] == '#') {
             $pValue = substr($pValue, 1);
@@ -251,7 +248,7 @@ class Drawing
         } elseif (strlen($pValue) == 3) {
             list($colorR, $colorG, $colorB) = [$pValue[0] . $pValue[0], $pValue[1] . $pValue[1], $pValue[2] . $pValue[2]];
         } else {
-            return false;
+            return null;
         }
 
         $colorR = hexdec($colorR);

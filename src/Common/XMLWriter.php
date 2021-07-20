@@ -116,12 +116,12 @@ class XMLWriter extends \XMLWriter
      * 2. If not, then it's a simple attribute-value pair
      *
      * @param string $element
-     * @param string|array $attributes
+     * @param string|array<string, string> $attributes
      * @param string $value
      *
      * @return void
      */
-    public function writeElementBlock($element, $attributes, $value = null)
+    public function writeElementBlock(string $element, $attributes, string $value = null)
     {
         $this->startElement($element);
         if (!is_array($attributes)) {

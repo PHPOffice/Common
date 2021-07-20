@@ -32,7 +32,7 @@ class Text
     /**
      * Build control characters array
      */
-    private static function buildControlCharacters()
+    private static function buildControlCharacters(): void
     {
         for ($i = 0; $i <= 19; ++$i) {
             if ($i != 9 && $i != 10 && $i != 13) {
@@ -58,7 +58,7 @@ class Text
      *
      * @return string
      */
-    public static function controlCharacterPHP2OOXML($value = '')
+    public static function controlCharacterPHP2OOXML(string $value = ''): string
     {
         if (empty(self::$controlCharacters)) {
             self::buildControlCharacters();
@@ -75,7 +75,7 @@ class Text
      *
      * @return string
      */
-    public static function numberFormat($number, $decimals)
+    public static function numberFormat(float $number, int $decimals): string
     {
         return number_format($number, $decimals, '.', '');
     }
@@ -89,7 +89,7 @@ class Text
      *
      * @return string
      */
-    public static function chr($dec)
+    public static function chr(int $dec): string
     {
         if ($dec <= 0x7F) {
             return chr($dec);
@@ -114,7 +114,7 @@ class Text
      *
      * @return string
      */
-    public static function controlCharacterOOXML2PHP($value = '')
+    public static function controlCharacterOOXML2PHP(string $value = ''): string
     {
         if (empty(self::$controlCharacters)) {
             self::buildControlCharacters();
@@ -130,7 +130,7 @@ class Text
      *
      * @return bool
      */
-    public static function isUTF8($value = '')
+    public static function isUTF8(string $value = ''): bool
     {
         return is_string($value) && ($value === '' || preg_match('/^./su', $value) == 1);
     }
@@ -138,11 +138,11 @@ class Text
     /**
      * Return UTF8 encoded value
      *
-     * @param string $value
+     * @param string|null $value
      *
      * @return string
      */
-    public static function toUTF8($value = '')
+    public static function toUTF8(?string $value = ''): string
     {
         if (!is_null($value) && !self::isUTF8($value)) {
             $value = utf8_encode($value);
@@ -162,7 +162,7 @@ class Text
      *
      * @since 0.11.0
      */
-    public static function toUnicode($text)
+    public static function toUnicode(string $text): string
     {
         return self::unicodeToEntities(self::utf8ToUnicode($text));
     }
@@ -172,12 +172,12 @@ class Text
      *
      * @param string $text UTF8 text
      *
-     * @return array
+     * @return array<int, int>
      *
      * @since 0.11.0
      * @see http://www.randomchaos.com/documents/?source=php_and_unicode
      */
-    public static function utf8ToUnicode($text)
+    public static function utf8ToUnicode(string $text): array
     {
         $unicode = [];
         $values = [];
@@ -212,14 +212,14 @@ class Text
     /**
      * Returns entites from unicode array
      *
-     * @param array $unicode
+     * @param array<int, int> $unicode
      *
      * @return string
      *
      * @since 0.11.0
      * @see http://www.randomchaos.com/documents/?source=php_and_unicode
      */
-    private static function unicodeToEntities($unicode)
+    private static function unicodeToEntities(array $unicode): string
     {
         $entities = '';
 
@@ -235,11 +235,11 @@ class Text
     /**
      * Return name without underscore for < 0.10.0 variable name compatibility
      *
-     * @param string $value
+     * @param string|null $value
      *
      * @return string
      */
-    public static function removeUnderscorePrefix($value)
+    public static function removeUnderscorePrefix(?string $value): string
     {
         if (!is_null($value)) {
             if (substr($value, 0, 1) == '_') {

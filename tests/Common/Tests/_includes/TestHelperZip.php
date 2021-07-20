@@ -2,11 +2,13 @@
 
 namespace PhpOffice\Common\Tests;
 
+use ZipArchive;
+
 class TestHelperZip
 {
-    public static function assertFileExists($fileZip, $path)
+    public static function assertFileExists(string $fileZip, string $path): bool
     {
-        $oZip = new \ZipArchive();
+        $oZip = new ZipArchive();
         if ($oZip->open($fileZip) !== true) {
             return false;
         }
@@ -17,7 +19,7 @@ class TestHelperZip
         return true;
     }
 
-    public static function assertFileContent($fileZip, $path, $content)
+    public static function assertFileContent(string $fileZip, string $path, string $content): bool
     {
         $oZip = new \ZipArchive();
         if ($oZip->open($fileZip) !== true) {

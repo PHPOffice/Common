@@ -27,7 +27,7 @@ class AutoloaderTest extends \PHPUnit\Framework\TestCase
     /**
      * Register
      */
-    public function testRegister()
+    public function testRegister(): void
     {
         Autoloader::register();
         $this->assertContains(
@@ -39,7 +39,7 @@ class AutoloaderTest extends \PHPUnit\Framework\TestCase
     /**
      * Autoload
      */
-    public function testAutoload()
+    public function testAutoload(): void
     {
         $declared = get_declared_classes();
         $declaredCount = count($declared);

@@ -18,15 +18,16 @@
 namespace PhpOffice\Common\Tests;
 
 use PhpOffice\Common\Text;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test class for Text
  *
  * @coversDefaultClass \PhpOffice\Common\Text
  */
-class TextTest extends \PHPUnit\Framework\TestCase
+class TextTest extends TestCase
 {
-    public function testControlCharacters()
+    public function testControlCharacters(): void
     {
         $this->assertEquals('', Text::controlCharacterPHP2OOXML());
         $this->assertEquals('aeiou', Text::controlCharacterPHP2OOXML('aeiou'));
@@ -39,14 +40,14 @@ class TextTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(chr(0x08), Text::controlCharacterOOXML2PHP('_x0008_'));
     }
 
-    public function testNumberFormat()
+    public function testNumberFormat(): void
     {
-        $this->assertEquals('2.1', Text::numberFormat('2.06', 1));
-        $this->assertEquals('2.1', Text::numberFormat('2.12', 1));
+        $this->assertEquals('2.1', Text::numberFormat(2.06, 1));
+        $this->assertEquals('2.1', Text::numberFormat(2.12, 1));
         $this->assertEquals('1234.0', Text::numberFormat(1234, 1));
     }
 
-    public function testChr()
+    public function testChr(): void
     {
         $this->assertEquals('A', Text::chr(65));
         $this->assertEquals('A', Text::chr(0x41));
@@ -62,7 +63,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
     /**
      * Is UTF8
      */
-    public function testIsUTF8()
+    public function testIsUTF8(): void
     {
         $this->assertTrue(Text::isUTF8(''));
         $this->assertTrue(Text::isUTF8('éééé'));
@@ -72,7 +73,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
     /**
      * Test unicode conversion
      */
-    public function testToUnicode()
+    public function testToUnicode(): void
     {
         $this->assertEquals('a', Text::toUnicode('a'));
         $this->assertEquals('\uc0{\u8364}', Text::toUnicode('€'));
@@ -82,7 +83,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
     /**
      * Test remove underscore prefix
      */
-    public function testRemoveUnderscorePrefix()
+    public function testRemoveUnderscorePrefix(): void
     {
         $this->assertEquals('item', Text::removeUnderscorePrefix('_item'));
     }

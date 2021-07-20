@@ -22,9 +22,7 @@
         "phpunit/phpunit": "^4.8.36 || ^7.0",
         "phpdocumentor/phpdocumentor":"2.*",
         "phpmd/phpmd": "2.*",
-        "sebastian/phpcpd": "2.*",
-        "phploc/phploc": "2.*",
-        "squizlabs/php_codesniffer": "2.*"
+        "phpstan/phpstan": "^0.12.88"
     },
     "autoload": {
         "psr-4": {

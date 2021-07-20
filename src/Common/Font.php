@@ -27,9 +27,9 @@ class Font
      *
      * @param int $fontSizeInPoints Font size (in points)
      *
-     * @return int Font size (in pixels)
+     * @return float Font size (in pixels)
      */
-    public static function fontSizeToPixels($fontSizeInPoints = 12)
+    public static function fontSizeToPixels(int $fontSizeInPoints = 12): float
     {
         return (16 / 12) * $fontSizeInPoints;
     }
@@ -41,7 +41,7 @@ class Font
      *
      * @return int Size (in pixels)
      */
-    public static function inchSizeToPixels($sizeInInch = 1)
+    public static function inchSizeToPixels(int $sizeInInch = 1): int
     {
         return $sizeInInch * 96;
     }
@@ -51,9 +51,9 @@ class Font
      *
      * @param int $sizeInCm Font size (in centimeters)
      *
-     * @return int Size (in pixels)
+     * @return float Size (in pixels)
      */
-    public static function centimeterSizeToPixels($sizeInCm = 1)
+    public static function centimeterSizeToPixels(int $sizeInCm = 1): float
     {
         return $sizeInCm * 37.795275591;
     }
@@ -65,7 +65,7 @@ class Font
      *
      * @return float
      */
-    public static function centimeterSizeToTwips($sizeInCm = 1)
+    public static function centimeterSizeToTwips(int $sizeInCm = 1): float
     {
         return $sizeInCm / 2.54 * 1440;
     }
@@ -75,9 +75,9 @@ class Font
      *
      * @param int $sizeInInch
      *
-     * @return float
+     * @return int
      */
-    public static function inchSizeToTwips($sizeInInch = 1)
+    public static function inchSizeToTwips(int $sizeInInch = 1): int
     {
         return $sizeInInch * 1440;
     }
@@ -89,7 +89,7 @@ class Font
      *
      * @return float
      */
-    public static function pixelSizeToTwips($sizeInPixel = 1)
+    public static function pixelSizeToTwips(int $sizeInPixel = 1): float
     {
         return $sizeInPixel / 96 * 1440;
     }
@@ -99,9 +99,9 @@ class Font
      *
      * @param int $sizeInPoint Size in point
      *
-     * @return int Size (in twips)
+     * @return float Size (in twips)
      */
-    public static function pointSizeToTwips($sizeInPoint = 1)
+    public static function pointSizeToTwips(int $sizeInPoint = 1): float
     {
         return $sizeInPoint / 72 * 1440;
     }

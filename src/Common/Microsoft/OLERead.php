@@ -23,6 +23,9 @@ if (!defined('IDENTIFIER_OLE')) {
 
 class OLERead
 {
+    /**
+     * @var string
+     */
     private $data = '';
 
     // OLE identifier
@@ -54,25 +57,55 @@ class OLERead
     public const START_BLOCK_POS = 0x74;
     public const SIZE_POS = 0x78;
 
-    public $summaryInformation = null;
-    public $docSummaryInfos = null;
-    public $powerpointDocument = null;
-    public $currentUser = null;
-    public $pictures = null;
-    public $rootEntry = null;
+    /**
+     * @var int|null
+     */
+    public $summaryInformation;
+    /**
+     * @var int|null
+     */
+    public $docSummaryInfos;
+    /**
+     * @var int|null
+     */
+    public $powerpointDocument;
+    /**
+     * @var int|null
+     */
+    public $currentUser;
+    /**
+     * @var int|null
+     */
+    public $pictures;
+    /**
+     * @var int|null
+     */
+    public $rootEntry;
+    /**
+     * @var array<int, array<string, int|string>>
+     */
     public $props = [];
-    public $smallBlockChain = null;
-    public $bigBlockChain = null;
-    public $entry = null;
+    /**
+     * @var string|null
+     */
+    public $smallBlockChain;
+    /**
+     * @var string|null
+     */
+    public $bigBlockChain;
+    /**
+     * @var string|null
+     */
+    public $entry;
 
     /**
      * Read the file
      *
-     * @param $sFileName string Filename
+     * @param string $sFileName Filename
      *
      * @throws \Exception
      */
-    public function read($sFileName)
+    public function read(string $sFileName): void
     {
         // Check if file exists and is readable
         if (!is_readable($sFileName)) {
@@ -167,12 +200,8 @@ class OLERead
      *
      * @return string
      */
-    public function getStream($stream)
+    public function getStream(int $stream): ?string
     {
-        if ($stream === null) {
-            return null;
-        }
-
         $streamData = '';
 
         if ($this->props[$stream]['size'] < self::SMALL_BLOCK_THRESHOLD) {
@@ -217,7 +246,7 @@ class OLERead
      *
      * @return string Data for standard stream
      */
-    private function readData($blID)
+    private function readData(int $blID): string
     {
         $block = $blID;
         $data = '';
@@ -234,7 +263,7 @@ class OLERead
     /**
      * Read entries in the directory stream.
      */
-    private function readPropertySets()
+    private function readPropertySets(): void
     {
         $offset = 0;
 
@@ -262,7 +291,8 @@ class OLERead
                     'name' => $name,
                     'type' => $type,
                     'startBlock' => $startBlock,
-                    'size' => $size, ];
+                    'size' => $size,
+                ];
 
                 // tmp helper to simplify checks
                 $upName = strtoupper($name);

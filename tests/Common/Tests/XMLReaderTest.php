@@ -29,7 +29,7 @@ class XMLReaderTest extends \PHPUnit\Framework\TestCase
     /**
      * Test reading XML from string
      */
-    public function testDomFromString()
+    public function testDomFromString(): void
     {
         $reader = new XMLReader();
         $reader->getDomFromString('<element attr="test"><child attr="subtest">AAA</child></element>');
@@ -44,7 +44,7 @@ class XMLReaderTest extends \PHPUnit\Framework\TestCase
     /**
      * Test reading XML from zip
      */
-    public function testDomFromZip()
+    public function testDomFromZip(): void
     {
         $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
 
@@ -61,7 +61,7 @@ class XMLReaderTest extends \PHPUnit\Framework\TestCase
      *
      * @expectedException \Exception
      */
-    public function testThrowsExceptionOnNonExistingArchive()
+    public function testThrowsExceptionOnNonExistingArchive(): void
     {
         $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
 
@@ -72,7 +72,7 @@ class XMLReaderTest extends \PHPUnit\Framework\TestCase
     /**
      * Test elements count
      */
-    public function testCountElements()
+    public function testCountElements(): void
     {
         $reader = new XMLReader();
         $reader->getDomFromString('<element attr="test"><child>AAA</child><child>BBB</child></element>');
@@ -83,7 +83,7 @@ class XMLReaderTest extends \PHPUnit\Framework\TestCase
     /**
      * Test read non existing elements
      */
-    public function testReturnNullOnNonExistingNode()
+    public function testReturnNullOnNonExistingNode(): void
     {
         $reader = new XMLReader();
         $this->assertEmpty($reader->getElements('/element/children'));
@@ -96,7 +96,7 @@ class XMLReaderTest extends \PHPUnit\Framework\TestCase
     /**
      * Test that xpath fails if custom namespace is not registered
      */
-    public function testShouldThrowExceptionIfNamespaceIsNotKnown()
+    public function testShouldThrowExceptionIfNamespaceIsNotKnown(): void
     {
         try {
             $reader = new XMLReader();
@@ -113,7 +113,7 @@ class XMLReaderTest extends \PHPUnit\Framework\TestCase
     /**
      * Test reading XML with manually registered namespace
      */
-    public function testShouldParseXmlWithCustomNamespace()
+    public function testShouldParseXmlWithCustomNamespace(): void
     {
         $reader = new XMLReader();
         $reader->getDomFromString('<element><test:child xmlns:test="http://phpword.com/my/custom/namespace">AAA</test:child></element>');
@@ -128,7 +128,7 @@ class XMLReaderTest extends \PHPUnit\Framework\TestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testShouldThowExceptionIfTryingToRegisterNamespaceBeforeReadingDoc()
+    public function testShouldThowExceptionIfTryingToRegisterNamespaceBeforeReadingDoc(): void
     {
         $reader = new XMLReader();
         $reader->registerNamespace('test', 'http://phpword.com/my/custom/namespace');

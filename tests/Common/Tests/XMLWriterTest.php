@@ -26,7 +26,7 @@ use PhpOffice\Common\XMLWriter;
  */
 class XMLWriterTest extends \PHPUnit\Framework\TestCase
 {
-    public function testConstruct()
+    public function testConstruct(): void
     {
         // Memory
         $object = new XMLWriter();
@@ -43,7 +43,7 @@ class XMLWriterTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('<element>BBB</element>' . chr(10), $object->getData());
     }
 
-    public function testWriteAttribute()
+    public function testWriteAttribute(): void
     {
         $xmlWriter = new XMLWriter();
         $xmlWriter->startElement('element');
@@ -53,7 +53,7 @@ class XMLWriterTest extends \PHPUnit\Framework\TestCase
         $this->assertSame('<element name="value"/>' . chr(10), $xmlWriter->getData());
     }
 
-    public function testWriteAttributeShouldWriteFloatValueLocaleIndependent()
+    public function testWriteAttributeShouldWriteFloatValueLocaleIndependent(): void
     {
         $value = 1.2;
 

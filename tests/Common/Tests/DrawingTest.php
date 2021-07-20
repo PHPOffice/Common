@@ -26,7 +26,7 @@ use PhpOffice\Common\Drawing;
  */
 class DrawingTest extends \PHPUnit\Framework\TestCase
 {
-    public function testDegreesAngle()
+    public function testDegreesAngle(): void
     {
         $value = rand(1, 100);
 
@@ -36,7 +36,7 @@ class DrawingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(round($value / 60000), Drawing::angleToDegrees($value));
     }
 
-    public function testPixelsCentimeters()
+    public function testPixelsCentimeters(): void
     {
         $value = rand(1, 100);
 
@@ -46,7 +46,7 @@ class DrawingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($value / 2.54 * Drawing::DPI_96, Drawing::centimetersToPixels($value));
     }
 
-    public function testPixelsEMU()
+    public function testPixelsEMU(): void
     {
         $value = rand(1, 100);
 
@@ -56,7 +56,7 @@ class DrawingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(round($value / 9525), Drawing::emuToPixels($value));
     }
 
-    public function testPixelsPoints()
+    public function testPixelsPoints(): void
     {
         $value = rand(1, 100);
 
@@ -66,7 +66,7 @@ class DrawingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($value * 1.333333333, Drawing::pointsToPixels($value));
     }
 
-    public function testPointsCentimeters()
+    public function testPointsCentimeters(): void
     {
         $value = rand(1, 100);
 
@@ -74,7 +74,7 @@ class DrawingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($value * 1.333333333 / Drawing::DPI_96 * 2.54, Drawing::pointsToCentimeters($value));
     }
 
-    public function testTwips()
+    public function testTwips(): void
     {
         $value = rand(1, 100);
 
@@ -97,12 +97,12 @@ class DrawingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(round($value / 15.873984), Drawing::twipsToPixels($value));
     }
 
-    public function testHTML()
+    public function testHTML(): void
     {
-        $this->assertFalse(Drawing::htmlToRGB('0'));
-        $this->assertFalse(Drawing::htmlToRGB('00'));
-        $this->assertFalse(Drawing::htmlToRGB('0000'));
-        $this->assertFalse(Drawing::htmlToRGB('00000'));
+        $this->assertNull(Drawing::htmlToRGB('0'));
+        $this->assertNull(Drawing::htmlToRGB('00'));
+        $this->assertNull(Drawing::htmlToRGB('0000'));
+        $this->assertNull(Drawing::htmlToRGB('00000'));
 
         $this->assertInternalType('array', Drawing::htmlToRGB('ABCDEF'));
         $this->assertCount(3, Drawing::htmlToRGB('ABCDEF'));
