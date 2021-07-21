@@ -138,14 +138,14 @@ class XMLWriter extends \XMLWriter
      *
      * @param bool $condition
      * @param string $element
-     * @param string $attribute
+     * @param string|null $attribute
      * @param mixed $value
      *
      * @return void
      */
-    public function writeElementIf($condition, $element, $attribute = null, $value = null)
+    public function writeElementIf(bool $condition, string $element, ?string $attribute = null, $value = null)
     {
-        if ($condition == true) {
+        if ($condition) {
             if (is_null($attribute)) {
                 $this->writeElement($element, $value);
             } else {
@@ -165,9 +165,9 @@ class XMLWriter extends \XMLWriter
      *
      * @return void
      */
-    public function writeAttributeIf($condition, $attribute, $value)
+    public function writeAttributeIf(bool $condition, string $attribute, $value)
     {
-        if ($condition == true) {
+        if ($condition) {
             $this->writeAttribute($attribute, $value);
         }
     }

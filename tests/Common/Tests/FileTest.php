@@ -34,6 +34,13 @@ class FileTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(File::fileExists('zip://' . $pathResources . 'files' . DIRECTORY_SEPARATOR . 'Sample_01_Simple.pptx#[Content_Types].xml'));
         $this->assertFalse(File::fileExists('zip://' . $pathResources . 'files' . DIRECTORY_SEPARATOR . 'Sample_01_Simple.pptx#404.xml'));
         $this->assertFalse(File::fileExists('zip://' . $pathResources . 'files' . DIRECTORY_SEPARATOR . '404.pptx#404.xml'));
+
+        // Set a ZIP en ReadOnly Mode
+        $zipTest = tempnam(sys_get_temp_dir(), 'PhpOfficeCommon');
+        copy($pathResources . 'files' . DIRECTORY_SEPARATOR . 'Sample_01_Simple.pptx', $zipTest);
+        chmod($zipTest, 333);
+        $this->assertFalse(File::fileExists('zip://' . $zipTest));
+        unlink($zipTest);
     }
 
     public function testGetFileContents(): void
