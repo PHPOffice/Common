@@ -58,7 +58,7 @@ class Drawing
      */
     public static function pixelsToPoints(int $pValue = 0): float
     {
-        return $pValue * 0.67777777;
+        return $pValue * 0.75;
     }
 
     /**
@@ -74,7 +74,7 @@ class Drawing
             return 0;
         }
 
-        return (($pValue * 1.333333333) / self::DPI_96) * 2.54;
+        return (($pValue / 0.75) / self::DPI_96) * 2.54;
     }
 
     /**
@@ -90,7 +90,7 @@ class Drawing
             return 0;
         }
 
-        return $pValue * 1.333333333;
+        return $pValue / 0.75;
     }
 
     /**
@@ -227,7 +227,7 @@ class Drawing
             return 0;
         }
 
-        return round($pValue / 15.873984);
+        return round($pValue / 15);
     }
 
     /**
