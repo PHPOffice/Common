@@ -17,9 +17,8 @@
 
 namespace PhpOffice\Common;
 
-/**
- * Drawing
- */
+use ZipArchive;
+
 class File
 {
     /**
@@ -29,7 +28,7 @@ class File
      *
      * @return bool
      */
-    public static function fileExists($pFilename)
+    public static function fileExists(string $pFilename): bool
     {
         // Sick construction, but it seems that
         // file_exists returns strange values when
@@ -39,7 +38,7 @@ class File
             $zipFile = substr($pFilename, 6, strpos($pFilename, '#') - 6);
             $archiveFile = substr($pFilename, strpos($pFilename, '#') + 1);
 
-            $zip = new \ZipArchive();
+            $zip = new ZipArchive();
             if ($zip->open($zipFile) === true) {
                 $returnValue = ($zip->getFromName($archiveFile) !== false);
                 $zip->close();
@@ -71,7 +70,7 @@ class File
             $zipFile = substr($pFilename, 6, strpos($pFilename, '#') - 6);
             $archiveFile = substr($pFilename, strpos($pFilename, '#') + 1);
 
-            $zip = new \ZipArchive();
+            $zip = new ZipArchive();
             if ($zip->open($zipFile) === true) {
                 $returnValue = $zip->getFromName($archiveFile);
                 $zip->close();

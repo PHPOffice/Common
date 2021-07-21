@@ -27,15 +27,21 @@ use PHPUnit\Framework\TestCase;
  */
 class TextTest extends TestCase
 {
-    public function testControlCharacters(): void
+    public function testControlCharactersPHP2OOXML(): void
     {
         $this->assertEquals('', Text::controlCharacterPHP2OOXML());
         $this->assertEquals('aeiou', Text::controlCharacterPHP2OOXML('aeiou'));
         $this->assertEquals('àéîöù', Text::controlCharacterPHP2OOXML('àéîöù'));
 
         $value = rand(0, 8);
-        $this->assertEquals('_x' . sprintf('%04s', strtoupper(dechex($value))) . '_', Text::controlCharacterPHP2OOXML(chr($value)));
+        $this->assertEquals(
+            '_x' . sprintf('%04s', strtoupper(dechex($value))) . '_',
+            Text::controlCharacterPHP2OOXML(chr($value))
+        );
+    }
 
+    public function testControlCharactersOOXML2PHP(): void
+    {
         $this->assertEquals('', Text::controlCharacterOOXML2PHP(''));
         $this->assertEquals(chr(0x08), Text::controlCharacterOOXML2PHP('_x0008_'));
     }
@@ -60,14 +66,18 @@ class TextTest extends TestCase
         $this->assertEquals('', Text::chr(2097152));
     }
 
-    /**
-     * Is UTF8
-     */
     public function testIsUTF8(): void
     {
         $this->assertTrue(Text::isUTF8(''));
         $this->assertTrue(Text::isUTF8('éééé'));
         $this->assertFalse(Text::isUTF8(utf8_decode('éééé')));
+    }
+
+    public function testToUtf8(): void
+    {
+        $this->assertNull(Text::toUTF8(null));
+        $this->assertEquals('eeee', Text::toUTF8('eeee'));
+        $this->assertEquals('éééé', Text::toUTF8('éééé'));
     }
 
     /**

@@ -140,9 +140,9 @@ class Text
      *
      * @param string|null $value
      *
-     * @return string
+     * @return string|null
      */
-    public static function toUTF8(?string $value = ''): string
+    public static function toUTF8(?string $value = ''): ?string
     {
         if (!is_null($value) && !self::isUTF8($value)) {
             $value = utf8_encode($value);
