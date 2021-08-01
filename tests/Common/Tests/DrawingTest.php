@@ -74,6 +74,13 @@ class DrawingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($value / 0.75 / Drawing::DPI_96 * 2.54, Drawing::pointsToCentimeters($value));
     }
 
+    public function testCentimetersPoints(): void
+    {
+        $this->assertEquals(0, Drawing::centimetersToPoints());
+        $this->assertEquals(28.346456692913385, Drawing::centimetersToPoints(1));
+        $this->assertEquals(31.181102362204726, Drawing::centimetersToPoints(1.1));
+    }
+
     public function testTwips(): void
     {
         $value = rand(1, 100);
