@@ -78,6 +78,22 @@ class Drawing
     }
 
     /**
+     * Convert centimeters width to points
+     *
+     * @param float $pValue Value in centimeters
+     *
+     * @return float
+     */
+    public static function centimetersToPoints(float $pValue = 0): float
+    {
+        if ($pValue == 0) {
+            return 0;
+        }
+
+        return ($pValue / 2.54) * self::DPI_96 * 0.75;
+    }
+
+    /**
      * Convert points width to pixels
      *
      * @param int $pValue Value in points
