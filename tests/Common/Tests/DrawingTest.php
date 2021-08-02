@@ -43,7 +43,7 @@ class DrawingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(0, Drawing::pixelsToCentimeters());
         $this->assertEquals($value / Drawing::DPI_96 * 2.54, Drawing::pixelsToCentimeters($value));
         $this->assertEquals(0, Drawing::centimetersToPixels());
-        $this->assertEquals($value / 2.54 * Drawing::DPI_96, Drawing::centimetersToPixels($value));
+        $this->assertEquals(round($value / 2.54 * Drawing::DPI_96), Drawing::centimetersToPixels($value));
     }
 
     public function testPixelsEMU(): void
@@ -72,6 +72,14 @@ class DrawingTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(0, Drawing::pointsToCentimeters());
         $this->assertEquals($value / 0.75 / Drawing::DPI_96 * 2.54, Drawing::pointsToCentimeters($value));
+    }
+
+    public function testPointsEmu(): void
+    {
+        $value = rand(1, 100);
+
+        $this->assertEquals(0, Drawing::pointsToEmu());
+        $this->assertEquals(round($value / 0.75 / 9525), Drawing::pointsToEmu($value));
     }
 
     public function testCentimetersPoints(): void

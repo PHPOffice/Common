@@ -24,11 +24,11 @@ class Drawing
     /**
      * Convert pixels to EMU
      *
-     * @param int $pValue Value in pixels
+     * @param float $pValue Value in pixels
      *
      * @return float
      */
-    public static function pixelsToEmu(int $pValue = 0): float
+    public static function pixelsToEmu(float $pValue = 0): float
     {
         return round($pValue * 9525);
     }
@@ -38,15 +38,15 @@ class Drawing
      *
      * @param int $pValue Value in EMU
      *
-     * @return float
+     * @return int
      */
-    public static function emuToPixels(int $pValue = 0): float
+    public static function emuToPixels(int $pValue = 0): int
     {
         if ($pValue == 0) {
             return 0;
         }
 
-        return round($pValue / 9525);
+        return (int) round($pValue / 9525);
     }
 
     /**
@@ -96,11 +96,11 @@ class Drawing
     /**
      * Convert points width to pixels
      *
-     * @param int $pValue Value in points
+     * @param float $pValue Value in points
      *
      * @return float
      */
-    public static function pointsToPixels(int $pValue = 0): float
+    public static function pointsToPixels(float $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
@@ -125,17 +125,17 @@ class Drawing
     /**
      * Convert centimeters width to pixels
      *
-     * @param int $pValue Value in centimeters
+     * @param float $pValue Value in centimeters
      *
-     * @return float
+     * @return int
      */
-    public static function centimetersToPixels(int $pValue = 0): float
+    public static function centimetersToPixels(float $pValue = 0): int
     {
         if ($pValue == 0) {
             return 0;
         }
 
-        return ($pValue / 2.54) * self::DPI_96;
+        return (int) round((($pValue / 2.54) * self::DPI_96));
     }
 
     /**
@@ -244,6 +244,22 @@ class Drawing
         }
 
         return round($pValue / 15);
+    }
+
+    /**
+     * Convert points to emu
+     *
+     * @param float $pValue
+     *
+     * @return int
+     */
+    public static function pointsToEmu(float $pValue = 0): int
+    {
+        if ($pValue == 0) {
+            return 0;
+        }
+
+        return (int) round(($pValue / 0.75) / 9525);
     }
 
     /**
