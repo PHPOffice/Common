@@ -64,11 +64,11 @@ class Drawing
     /**
      * Convert points width to centimeters
      *
-     * @param int $pValue Value in points
+     * @param float $pValue Value in points
      *
      * @return float
      */
-    public static function pointsToCentimeters(int $pValue = 0): float
+    public static function pointsToCentimeters(float $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
