@@ -9,7 +9,8 @@
  * file that was distributed with this source code. For the full list of
  * contributors, visit https://github.com/PHPOffice/Common/contributors.
  *
- * @link        https://github.com/PHPOffice/Common
+ * @see        https://github.com/PHPOffice/Common
+ *
  * @copyright   2009-2016 PHPOffice Common contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
@@ -35,8 +36,8 @@ namespace PhpOffice\Common;
 class XMLWriter extends \XMLWriter
 {
     /** Temporary storage method */
-    const STORAGE_MEMORY = 1;
-    const STORAGE_DISK = 2;
+    public const STORAGE_MEMORY = 1;
+    public const STORAGE_DISK = 2;
 
     /**
      * Temporary filename
@@ -50,6 +51,7 @@ class XMLWriter extends \XMLWriter
      *
      * @param int $pTemporaryStorage Temporary storage location
      * @param string $pTemporaryStorageDir Temporary storage folder
+     * @param bool $compatibility
      */
     public function __construct($pTemporaryStorage = self::STORAGE_MEMORY, $pTemporaryStorageDir = null, $compatibility = false)
     {
@@ -86,7 +88,7 @@ class XMLWriter extends \XMLWriter
             return;
         }
         if (PHP_OS != 'WINNT' && @unlink($this->tempFileName) === false) {
-            throw new \Exception('The file '.$this->tempFileName.' could not be deleted.');
+            throw new \Exception('The file ' . $this->tempFileName . ' could not be deleted.');
         }
     }
 
@@ -102,9 +104,9 @@ class XMLWriter extends \XMLWriter
         }
 
         $this->flush();
+
         return file_get_contents($this->tempFileName);
     }
-
 
     /**
      * Write simple element and attribute(s) block
@@ -114,15 +116,16 @@ class XMLWriter extends \XMLWriter
      * 2. If not, then it's a simple attribute-value pair
      *
      * @param string $element
-     * @param string|array $attributes
+     * @param string|array<string, string> $attributes
      * @param string $value
+     *
      * @return void
      */
-    public function writeElementBlock($element, $attributes, $value = null)
+    public function writeElementBlock(string $element, $attributes, string $value = null)
     {
         $this->startElement($element);
         if (!is_array($attributes)) {
-            $attributes = array($attributes => $value);
+            $attributes = [$attributes => $value];
         }
         foreach ($attributes as $attribute => $value) {
             $this->writeAttribute($attribute, $value);
@@ -135,13 +138,14 @@ class XMLWriter extends \XMLWriter
      *
      * @param bool $condition
      * @param string $element
-     * @param string $attribute
+     * @param string|null $attribute
      * @param mixed $value
+     *
      * @return void
      */
-    public function writeElementIf($condition, $element, $attribute = null, $value = null)
+    public function writeElementIf(bool $condition, string $element, ?string $attribute = null, $value = null)
     {
-        if ($condition == true) {
+        if ($condition) {
             if (is_null($attribute)) {
                 $this->writeElement($element, $value);
             } else {
@@ -158,11 +162,12 @@ class XMLWriter extends \XMLWriter
      * @param bool $condition
      * @param string $attribute
      * @param mixed $value
+     *
      * @return void
      */
-    public function writeAttributeIf($condition, $attribute, $value)
+    public function writeAttributeIf(bool $condition, string $attribute, $value)
     {
-        if ($condition == true) {
+        if ($condition) {
             $this->writeAttribute($attribute, $value);
         }
     }
@@ -170,6 +175,7 @@ class XMLWriter extends \XMLWriter
     /**
      * @param string $name
      * @param mixed $value
+     *
      * @return bool
      */
     public function writeAttribute($name, $value)
@@ -177,6 +183,7 @@ class XMLWriter extends \XMLWriter
         if (is_float($value)) {
             $value = json_encode($value);
         }
+
         return parent::writeAttribute($name, $value);
     }
 }

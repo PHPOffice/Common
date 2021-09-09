@@ -9,7 +9,8 @@
  * file that was distributed with this source code. For the full list of
  * contributors, visit https://github.com/PHPOffice/Common/contributors.
  *
- * @link        https://github.com/PHPOffice/Common
+ * @see        https://github.com/PHPOffice/Common
+ *
  * @copyright   2009-2016 PHPOffice Common contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
@@ -22,16 +23,16 @@ namespace PhpOffice\Common;
 class Autoloader
 {
     /** @const string */
-    const NAMESPACE_PREFIX = 'PhpOffice\\Common\\';
+    public const NAMESPACE_PREFIX = 'PhpOffice\\Common\\';
 
     /**
      * Register
      *
      * @return void
      */
-    public static function register()
+    public static function register(): void
     {
-        spl_autoload_register(array(new self, 'autoload'));
+        spl_autoload_register([new self(), 'autoload']);
     }
 
     /**
@@ -39,7 +40,7 @@ class Autoloader
      *
      * @param string $class
      */
-    public static function autoload($class)
+    public static function autoload(string $class): void
     {
         $prefixLength = strlen(self::NAMESPACE_PREFIX);
         if (0 === strncmp(self::NAMESPACE_PREFIX, $class, $prefixLength)) {

@@ -35,13 +35,14 @@ class ZipArchiveAdapter implements ZipInterface
         if ($this->oZipArchive->close() === false) {
             throw new \Exception("Could not close zip file $this->filename.");
         }
+
         return $this;
     }
 
     public function addFromString($localname, $contents)
     {
         if ($this->oZipArchive->addFromString($localname, $contents) === false) {
-            throw new \Exception("Error zipping files : " . $localname);
+            throw new \Exception('Error zipping files : ' . $localname);
         }
 
         return $this;
