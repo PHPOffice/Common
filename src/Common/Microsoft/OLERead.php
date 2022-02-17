@@ -18,7 +18,7 @@
 namespace PhpOffice\Common\Microsoft;
 
 if (!defined('IDENTIFIER_OLE')) {
-    define('IDENTIFIER_OLE', pack('CCCCCCCC', 0xd0, 0xcf, 0x11, 0xe0, 0xa1, 0xb1, 0x1a, 0xe1));
+    define('IDENTIFIER_OLE', pack('CCCCCCCC', 0xD0, 0xCF, 0x11, 0xE0, 0xA1, 0xB1, 0x1A, 0xE1));
 }
 
 class OLERead
@@ -44,12 +44,12 @@ class OLERead
     public const SMALL_BLOCK_THRESHOLD = 0x1000;
 
     // header offsets
-    public const NUM_BIG_BLOCK_DEPOT_BLOCKS_POS = 0x2c;
+    public const NUM_BIG_BLOCK_DEPOT_BLOCKS_POS = 0x2C;
     public const ROOT_START_BLOCK_POS = 0x30;
-    public const SMALL_BLOCK_DEPOT_BLOCK_POS = 0x3c;
+    public const SMALL_BLOCK_DEPOT_BLOCK_POS = 0x3C;
     public const EXTENSION_BLOCK_POS = 0x44;
     public const NUM_EXTENSION_BLOCK_POS = 0x48;
-    public const BIG_BLOCK_DEPOT_BLOCKS_POS = 0x4c;
+    public const BIG_BLOCK_DEPOT_BLOCKS_POS = 0x4C;
 
     // property storage offsets (directory offsets)
     public const SIZE_OF_NAME_POS = 0x40;
