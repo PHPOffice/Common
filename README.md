@@ -10,7 +10,7 @@ PHPOffice Common is a library written in pure PHP that provides a set of compone
 
 PHPOffice Common is an open source project licensed under the terms of [LGPL version 3](https://github.com/PHPOffice/Common/blob/develop/COPYING.LESSER). PHPOffice Common is aimed to be a high quality software product by incorporating [continuous integration](https://travis-ci.org/PHPOffice/Common) and [unit testing](http://phpoffice.github.io/Common/coverage/develop/). You can learn more about PHPPowerPoint by reading the [API Documentation](http://phpoffice.github.io/Common/docs/develop/).
 
-Read more about PHPPowerPoint:
+Read more about PHPOffice Common:
 
 - [Requirements](#requirements)
 - [Contributing](#contributing)
