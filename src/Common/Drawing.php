@@ -259,7 +259,7 @@ class Drawing
             return 0;
         }
 
-        return (int) round(($pValue / 0.75) / 9525);
+        return (int) round(($pValue / 0.75) * 9525);
     }
 
     /**
