@@ -79,14 +79,14 @@ class DrawingTest extends \PHPUnit\Framework\TestCase
         $value = rand(1, 100);
 
         $this->assertEquals(0, Drawing::pointsToEmu());
-        $this->assertEquals(round($value / 0.75 / 9525), Drawing::pointsToEmu($value));
+        $this->assertEquals(round($value / 0.75 * 9525), Drawing::pointsToEmu($value));
     }
 
     public function testCentimetersPoints(): void
     {
         $this->assertEquals(0, Drawing::centimetersToPoints());
         $this->assertEquals(28.346456692913385, Drawing::centimetersToPoints(1));
-        $this->assertEquals(31.181102362204726, Drawing::centimetersToPoints(1.1));
+        $this->assertEquals(31.181102362204722, Drawing::centimetersToPoints(1.1));
     }
 
     public function testTwips(): void

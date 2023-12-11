@@ -118,7 +118,7 @@ class Drawing
      */
     public static function pixelsToCentimeters(int $pValue = 0): float
     {
-        //return $pValue * 0.028;
+        // return $pValue * 0.028;
         return ($pValue / self::DPI_96) * 2.54;
     }
 
@@ -135,7 +135,7 @@ class Drawing
             return 0;
         }
 
-        return (int) round((($pValue / 2.54) * self::DPI_96));
+        return (int) round(($pValue / 2.54) * self::DPI_96);
     }
 
     /**
@@ -259,7 +259,7 @@ class Drawing
             return 0;
         }
 
-        return (int) round(($pValue / 0.75) / 9525);
+        return (int) round(($pValue / 0.75) * 9525);
     }
 
     /**

@@ -1,11 +1,11 @@
 <?php
 
-namespace Common\Tests\Adapter\Zip;
+namespace PhpOffice\Common\Tests\Adapter\Zip;
 
 use PhpOffice\Common\Adapter\Zip\ZipArchiveAdapter;
 use PhpOffice\Common\Adapter\Zip\ZipInterface;
 
-class ZipArchiveAdapterTest extends AbstractZipAdapterTest
+class ZipArchiveAdapterTest extends AbstractZipAdapter
 {
     protected function createAdapter(): ZipInterface
     {

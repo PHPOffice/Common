@@ -31,13 +31,13 @@ class PasswordEncoderTest extends \PHPUnit\Framework\TestCase
      */
     public function testEncodePassword(): void
     {
-        //given
+        // Given
         $password = 'test';
 
-        //when
+        // When
         $hashPassword = PasswordEncoder::hashPassword($password);
 
-        //then
+        // Then
         $this->assertEquals('M795/MAlmGU8RIsY9Q9uDLHC7bk=', $hashPassword);
     }
 
@@ -46,14 +46,14 @@ class PasswordEncoderTest extends \PHPUnit\Framework\TestCase
      */
     public function testEncodePasswordWithSalt(): void
     {
-        //given
+        // Given
         $password = 'test';
         $salt = base64_decode('uq81pJRRGFIY5U+E9gt8tA==');
 
-        //when
+        // When
         $hashPassword = PasswordEncoder::hashPassword($password, PasswordEncoder::ALGORITHM_SHA_1, $salt);
 
-        //then
+        // Then
         $this->assertEquals('QiDOcpia1YzSVJPiKPwWebl9p/0=', $hashPassword);
     }
 
@@ -62,14 +62,14 @@ class PasswordEncoderTest extends \PHPUnit\Framework\TestCase
      */
     public function testDefaultsToSha1IfUnsupportedAlgorithm(): void
     {
-        //given
+        // Given
         $password = 'test';
         $salt = base64_decode('uq81pJRRGFIY5U+E9gt8tA==');
 
-        //when
+        // When
         $hashPassword = PasswordEncoder::hashPassword($password, PasswordEncoder::ALGORITHM_MAC, $salt);
 
-        //then
+        // Then
         $this->assertEquals('QiDOcpia1YzSVJPiKPwWebl9p/0=', $hashPassword);
     }
 
@@ -78,14 +78,14 @@ class PasswordEncoderTest extends \PHPUnit\Framework\TestCase
      */
     public function testEncodePasswordWithNullAsciiCodeInPassword(): void
     {
-        //given
+        // Given
         $password = 'test' . chr(0);
         $salt = base64_decode('uq81pJRRGFIY5U+E9gt8tA==');
 
-        //when
+        // When
         $hashPassword = PasswordEncoder::hashPassword($password, PasswordEncoder::ALGORITHM_MAC, $salt, 1);
 
-        //then
+        // Then
         $this->assertEquals('rDV9sgdDsztoCQlvRCb1lF2wxNg=', $hashPassword);
     }
 }

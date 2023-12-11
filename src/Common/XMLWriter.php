@@ -143,7 +143,7 @@ class XMLWriter extends \XMLWriter
      *
      * @return void
      */
-    public function writeElementIf(bool $condition, string $element, ?string $attribute = null, $value = null)
+    public function writeElementIf(bool $condition, string $element, string $attribute = null, $value = null)
     {
         if ($condition) {
             if (is_null($attribute)) {

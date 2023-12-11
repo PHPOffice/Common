@@ -18,7 +18,6 @@
 namespace PhpOffice\Common\Tests;
 
 use Exception;
-use InvalidArgumentException;
 use PhpOffice\Common\XMLReader;
 use PHPUnit\Framework\TestCase;
 
@@ -52,7 +51,7 @@ class XMLReaderTest extends TestCase
         $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
 
         $reader = new XMLReader();
-        $reader->getDomFromZip($pathResources . 'reader.zip', 'test.xml');
+        $this->assertInstanceOf(\DOMDocument::class, $reader->getDomFromZip($pathResources . 'reader.zip', 'test.xml'));
 
         $this->assertTrue($reader->elementExists('/element/child'));
 
@@ -60,11 +59,22 @@ class XMLReaderTest extends TestCase
     }
 
     /**
+     * Test reading XML from zip
+     */
+    public function testDomFromZipWithSharepointPath(): void
+    {
+        $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
+
+        $reader = new XMLReader();
+        $this->assertInstanceOf(\DOMDocument::class, $reader->getDomFromZip($pathResources . 'reader.zip', '/test.xml'));
+    }
+
+    /**
      * Test that read from non existing archive throws exception
      */
     public function testThrowsExceptionOnNonExistingArchive(): void
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Cannot find archive file.');
 
         $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
@@ -102,16 +112,12 @@ class XMLReaderTest extends TestCase
      */
     public function testShouldThrowExceptionIfNamespaceIsNotKnown(): void
     {
-        try {
-            $reader = new XMLReader();
-            $reader->getDomFromString('<element><test:child xmlns:test="http://phpword.com/my/custom/namespace">AAA</test:child></element>');
+        $reader = new XMLReader();
+        $reader->getDomFromString('<element><test:child xmlns:test="http://phpword.com/my/custom/namespace">AAA</test:child></element>');
+        $reader->registerNamespace('test', 'http://phpword.com/my/custom/namespace');
 
-            $this->assertTrue($reader->elementExists('/element/test:child'));
-            $this->assertEquals('AAA', $reader->getElement('/element/test:child')->textContent);
-            $this->fail();
-        } catch (\Exception $e) {
-            $this->assertTrue(true);
-        }
+        $this->assertTrue($reader->elementExists('/element/test:child'));
+        $this->assertEquals('AAA', $reader->getElement('/element/test:child')->textContent);
     }
 
     /**
@@ -132,7 +138,7 @@ class XMLReaderTest extends TestCase
      */
     public function testShouldThowExceptionIfTryingToRegisterNamespaceBeforeReadingDoc(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Dom needs to be loaded before registering a namespace');
 
         $reader = new XMLReader();

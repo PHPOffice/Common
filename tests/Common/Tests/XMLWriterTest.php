@@ -152,7 +152,7 @@ class XMLWriterTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array<array<bool|string|null>>
      */
-    public function dataProviderWriteElementIf(): array
+    public static function dataProviderWriteElementIf(): array
     {
         return [
             [
