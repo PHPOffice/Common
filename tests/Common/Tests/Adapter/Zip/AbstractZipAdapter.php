@@ -1,11 +1,11 @@
 <?php
 
-namespace Common\Tests\Adapter\Zip;
+namespace PhpOffice\Common\Tests\Adapter\Zip;
 
 use PhpOffice\Common\Adapter\Zip\ZipInterface;
 use PhpOffice\Common\Tests\TestHelperZip;
 
-abstract class AbstractZipAdapterTest extends \PHPUnit\Framework\TestCase
+abstract class AbstractZipAdapter extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var string

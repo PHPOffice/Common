@@ -18,10 +18,6 @@
 
 namespace PhpOffice\PhpPowerpoint\Tests;
 
-use DOMDocument;
-use DOMElement;
-use DOMNode;
-use DOMNodeList;
 use DOMXpath;
 
 /**
@@ -37,16 +33,16 @@ class XmlDocument
     private $path;
 
     /**
-     * DOMDocument object
+     * \DOMDocument object
      *
-     * @var DOMDocument
+     * @var \DOMDocument
      */
     private $dom;
 
     /**
      * DOMXpath object
      *
-     * @var DOMXpath|null
+     * @var \DOMXpath|null
      */
     private $xpath;
 
@@ -72,9 +68,9 @@ class XmlDocument
      *
      * @param string $file
      *
-     * @return DOMDocument
+     * @return \DOMDocument
      */
-    public function getFileDom(string $file = 'word/document.xml'): DOMDocument
+    public function getFileDom(string $file = 'word/document.xml'): \DOMDocument
     {
         if (null !== $this->dom && $file === $this->file) {
             return $this->dom;
@@ -84,7 +80,7 @@ class XmlDocument
         $this->file = $file;
 
         $file = $this->path . '/' . $file;
-        $this->dom = new DOMDocument();
+        $this->dom = new \DOMDocument();
         $this->dom->load($file);
 
         return $this->dom;
@@ -96,16 +92,16 @@ class XmlDocument
      * @param string $path
      * @param string $file
      *
-     * @return DOMNodeList<DOMElement>
+     * @return \DOMNodeList<\DOMElement>
      */
-    public function getNodeList(string $path, string $file = 'word/document.xml'): DOMNodeList
+    public function getNodeList(string $path, string $file = 'word/document.xml'): \DOMNodeList
     {
         if ($this->dom === null || $file !== $this->file) {
             $this->getFileDom($file);
         }
 
         if (null === $this->xpath) {
-            $this->xpath = new DOMXpath($this->dom);
+            $this->xpath = new \DOMXpath($this->dom);
         }
 
         return $this->xpath->query($path);
@@ -117,9 +113,9 @@ class XmlDocument
      * @param string $path
      * @param string $file
      *
-     * @return DOMNode
+     * @return \DOMNode
      */
-    public function getElement(string $path, string $file = 'word/document.xml'): DOMNode
+    public function getElement(string $path, string $file = 'word/document.xml'): \DOMNode
     {
         $elements = $this->getNodeList($path, $file);
 
@@ -159,7 +155,7 @@ class XmlDocument
     {
         $element = $this->getElement($path, $file);
 
-        return $element instanceof DOMElement ? $element->getAttribute($attribute) : '';
+        return $element instanceof \DOMElement ? $element->getAttribute($attribute) : '';
     }
 
     /**
@@ -175,7 +171,7 @@ class XmlDocument
     {
         $element = $this->getElement($path, $file);
 
-        return $element instanceof DOMElement ? $element->hasAttribute($attribute) : false;
+        return $element instanceof \DOMElement ? $element->hasAttribute($attribute) : false;
     }
 
     /**

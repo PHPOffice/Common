@@ -2,12 +2,10 @@
 
 namespace PhpOffice\Common\Adapter\Zip;
 
-use PclZip;
-
 class PclZipAdapter implements ZipInterface
 {
     /**
-     * @var PclZip
+     * @var \PclZip
      */
     protected $oPclZip;
 
@@ -18,7 +16,7 @@ class PclZipAdapter implements ZipInterface
 
     public function open($filename)
     {
-        $this->oPclZip = new PclZip($filename);
+        $this->oPclZip = new \PclZip($filename);
         $this->tmpDir = sys_get_temp_dir();
 
         return $this;
