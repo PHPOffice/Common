@@ -51,11 +51,22 @@ class XMLReaderTest extends TestCase
         $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
 
         $reader = new XMLReader();
-        $reader->getDomFromZip($pathResources . 'reader.zip', 'test.xml');
+        $this->assertInstanceOf(\DOMDocument::class, $reader->getDomFromZip($pathResources . 'reader.zip', 'test.xml'));
 
         $this->assertTrue($reader->elementExists('/element/child'));
 
         $this->assertFalse($reader->getDomFromZip($pathResources . 'reader.zip', 'non_existing_xml_file.xml'));
+    }
+
+    /**
+     * Test reading XML from zip
+     */
+    public function testDomFromZipWithSharepointPath(): void
+    {
+        $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
+
+        $reader = new XMLReader();
+        $this->assertInstanceOf(\DOMDocument::class, $reader->getDomFromZip($pathResources . 'reader.zip', '/test.xml'));
     }
 
     /**
