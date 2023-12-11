@@ -2,12 +2,10 @@
 
 namespace PhpOffice\Common\Adapter\Zip;
 
-use ZipArchive;
-
 class ZipArchiveAdapter implements ZipInterface
 {
     /**
-     * @var ZipArchive
+     * @var \ZipArchive
      */
     protected $oZipArchive;
 
@@ -19,12 +17,12 @@ class ZipArchiveAdapter implements ZipInterface
     public function open($filename)
     {
         $this->filename = $filename;
-        $this->oZipArchive = new ZipArchive();
+        $this->oZipArchive = new \ZipArchive();
 
-        if ($this->oZipArchive->open($this->filename, ZipArchive::OVERWRITE) === true) {
+        if ($this->oZipArchive->open($this->filename, \ZipArchive::OVERWRITE) === true) {
             return $this;
         }
-        if ($this->oZipArchive->open($this->filename, ZipArchive::CREATE) === true) {
+        if ($this->oZipArchive->open($this->filename, \ZipArchive::CREATE) === true) {
             return $this;
         }
         throw new \Exception("Could not open $this->filename for writing.");

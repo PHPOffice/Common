@@ -21,11 +21,16 @@
     "require-dev": {
         "phpunit/phpunit": ">=7",
         "phpmd/phpmd": "2.*",
-        "phpstan/phpstan": "^0.12.88"
+        "phpstan/phpstan": "^0.12.88 || ^1.0.0"
     },
     "autoload": {
         "psr-4": {
             "PhpOffice\\Common\\": "src/Common/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PhpOffice\\Common\\Tests\\": "tests/Common/Tests"
         }
     }
 }

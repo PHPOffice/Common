@@ -49,7 +49,7 @@ class PasswordEncoder
         self::ALGORITHM_MAC => [5, ''], // 'mac' -> not possible with hash()
         self::ALGORITHM_RIPEMD => [6, 'ripemd'],
         self::ALGORITHM_RIPEMD_160 => [7, 'ripemd160'],
-        self::ALGORITHM_HMAC => [9, ''], //'hmac' -> not possible with hash()
+        self::ALGORITHM_HMAC => [9, ''], // 'hmac' -> not possible with hash()
         self::ALGORITHM_SHA_256 => [12, 'sha256'],
         self::ALGORITHM_SHA_384 => [13, 'sha384'],
         self::ALGORITHM_SHA_512 => [14, 'sha512'],

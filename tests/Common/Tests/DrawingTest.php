@@ -86,7 +86,7 @@ class DrawingTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(0, Drawing::centimetersToPoints());
         $this->assertEquals(28.346456692913385, Drawing::centimetersToPoints(1));
-        $this->assertEquals(31.181102362204726, Drawing::centimetersToPoints(1.1));
+        $this->assertEquals(31.181102362204722, Drawing::centimetersToPoints(1.1));
     }
 
     public function testTwips(): void
