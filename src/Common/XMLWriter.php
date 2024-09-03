@@ -53,7 +53,7 @@ class XMLWriter extends \XMLWriter
      * @param string $pTemporaryStorageDir Temporary storage folder
      * @param bool $compatibility
      */
-    public function __construct($pTemporaryStorage = self::STORAGE_MEMORY, $pTemporaryStorageDir = null, $compatibility = false)
+    public function __construct(int $pTemporaryStorage = self::STORAGE_MEMORY, ?string $pTemporaryStorageDir = null, bool $compatibility = false)
     {
         // Open temporary storage
         if ($pTemporaryStorage == self::STORAGE_MEMORY) {
@@ -121,7 +121,7 @@ class XMLWriter extends \XMLWriter
      *
      * @return void
      */
-    public function writeElementBlock(string $element, $attributes, string $value = null)
+    public function writeElementBlock(string $element, $attributes, ?string $value = null)
     {
         $this->startElement($element);
         if (!is_array($attributes)) {
@@ -143,7 +143,7 @@ class XMLWriter extends \XMLWriter
      *
      * @return void
      */
-    public function writeElementIf(bool $condition, string $element, string $attribute = null, $value = null)
+    public function writeElementIf(bool $condition, string $element, ?string $attribute = null, $value = null)
     {
         if ($condition) {
             if (is_null($attribute)) {

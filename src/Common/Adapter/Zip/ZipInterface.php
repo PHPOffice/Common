@@ -34,5 +34,5 @@ interface ZipInterface
      *
      * @throws \Exception
      */
-    public function addFromString($localname, $contents);
+    public function addFromString(string $localname, string $contents, bool $withCompression = true);
 }

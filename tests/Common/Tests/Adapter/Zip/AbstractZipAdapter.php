@@ -15,7 +15,7 @@ abstract class AbstractZipAdapter extends \PHPUnit\Framework\TestCase
     /**
      * Returns a new instance of the adapter to test
      *
-     * @return \PhpOffice\Common\Adapter\Zip\ZipInterface
+     * @return ZipInterface
      */
     abstract protected function createAdapter(): ZipInterface;
 
@@ -50,17 +50,43 @@ abstract class AbstractZipAdapter extends \PHPUnit\Framework\TestCase
         $this->assertSame($adapter, $adapter->close());
     }
 
-    public function testAddFromString(): void
+    public function testAddFromStringWithCompression(): void
     {
-        $expectedPath = 'file.test';
-        $expectedContent = 'Content';
+        $expectedPath = 'file.png';
+        $expectedContent = file_get_contents(
+            PHPOFFICE_COMMON_TESTS_BASE_DIR
+            . DIRECTORY_SEPARATOR . 'resources'
+            . DIRECTORY_SEPARATOR . 'images'
+            . DIRECTORY_SEPARATOR . 'PHPPowerPointLogo.png'
+        );
 
         $adapter = $this->createAdapter();
         $adapter->open($this->zipTest);
-        $this->assertSame($adapter, $adapter->addFromString($expectedPath, $expectedContent));
+        $this->assertSame($adapter, $adapter->addFromString($expectedPath, $expectedContent, true));
         $adapter->close();
 
         $this->assertTrue(TestHelperZip::assertFileExists($this->zipTest, $expectedPath));
+        $this->assertTrue(TestHelperZip::assertFileIsCompressed($this->zipTest, $expectedPath));
+        $this->assertTrue(TestHelperZip::assertFileContent($this->zipTest, $expectedPath, $expectedContent));
+    }
+
+    public function testAddFromStringWithNoCompression(): void
+    {
+        $expectedPath = 'file.png';
+        $expectedContent = file_get_contents(
+            PHPOFFICE_COMMON_TESTS_BASE_DIR
+            . DIRECTORY_SEPARATOR . 'resources'
+            . DIRECTORY_SEPARATOR . 'images'
+            . DIRECTORY_SEPARATOR . 'PHPPowerPointLogo.png'
+        );
+
+        $adapter = $this->createAdapter();
+        $adapter->open($this->zipTest);
+        $this->assertSame($adapter, $adapter->addFromString($expectedPath, $expectedContent, false));
+        $adapter->close();
+
+        $this->assertTrue(TestHelperZip::assertFileExists($this->zipTest, $expectedPath));
+        $this->assertFalse(TestHelperZip::assertFileIsCompressed($this->zipTest, $expectedPath));
         $this->assertTrue(TestHelperZip::assertFileContent($this->zipTest, $expectedPath, $expectedContent));
     }
 }
