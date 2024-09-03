@@ -33,4 +33,16 @@ class TestHelperZip
 
         return true;
     }
+
+    public static function assertFileIsCompressed(string $fileZip, string $path): bool
+    {
+        $oZip = new \ZipArchive();
+        $oZip->open($fileZip);
+        $stat = $oZip->statName($path);
+
+        // size: uncompressed
+        // comp_size: compressed
+
+        return $stat['size'] > $stat['comp_size'];
+    }
 }

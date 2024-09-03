@@ -1,10 +1,9 @@
-[![Latest Stable Version](https://poser.pugx.org/phpoffice/common/v/stable.png)](https://packagist.org/packages/phpoffice/common)
-[![PHPOffice\Common](https://github.com/PHPOffice/Common/actions/workflows/php.yml/badge.svg)](https://github.com/PHPOffice/Common/actions/workflows/php.yml)
-[![Coverage Status](https://coveralls.io/repos/github/PHPOffice/Common/badge.svg?branch=develop)](https://coveralls.io/github/PHPOffice/Common?branch=develop)
-[![Total Downloads](https://poser.pugx.org/phpoffice/common/downloads.png)](https://packagist.org/packages/phpoffice/common)
-[![License](https://poser.pugx.org/phpoffice/common/license.png)](https://packagist.org/packages/phpoffice/common)
-[![Join the chat at https://gitter.im/PHPOffice/Common](https://img.shields.io/badge/GITTER-join%20chat-green.svg)](https://gitter.im/PHPOffice/Common)
+[![Latest Stable Version](https://poser.pugx.org/phpoffice/common/v)](https://packagist.org/packages/phpoffice/common)
+[![Coverage Status](https://coveralls.io/repos/github/PHPOffice/Common/badge.svg?branch=master)](https://coveralls.io/github/PHPOffice/Common?branch=master)
+[![Total Downloads](https://poser.pugx.org/phpoffice/common/downloads)](https://packagist.org/packages/phpoffice/common)
+[![License](https://poser.pugx.org/phpoffice/common/license)](https://packagist.org/packages/phpoffice/common)
 
+Branch Master : [![PHPOffice\Common](https://github.com/PHPOffice/Common/actions/workflows/php.yml/badge.svg?branch=master)](https://github.com/PHPOffice/Common/actions/workflows/php.yml)
 
 PHPOffice Common is a library written in pure PHP that provides a set of components for PHPOffice librairies. 
 

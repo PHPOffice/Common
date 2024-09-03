@@ -37,10 +37,13 @@ class ZipArchiveAdapter implements ZipInterface
         return $this;
     }
 
-    public function addFromString($localname, $contents)
+    public function addFromString(string $localname, string $contents, bool $withCompression = true)
     {
         if ($this->oZipArchive->addFromString($localname, $contents) === false) {
             throw new \Exception('Error zipping files : ' . $localname);
+        }
+        if (!$withCompression) {
+            $this->oZipArchive->setCompressionName($localname, \ZipArchive::CM_STORE);
         }
 
         return $this;

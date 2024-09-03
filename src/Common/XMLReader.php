@@ -108,7 +108,7 @@ class XMLReader
      *
      * @return \DOMNodeList<\DOMElement>
      */
-    public function getElements(string $path, \DOMElement $contextNode = null)
+    public function getElements(string $path, ?\DOMElement $contextNode = null)
     {
         if ($this->dom === null) {
             return new \DOMNodeList();
@@ -154,7 +154,7 @@ class XMLReader
      *
      * @return \DOMElement|null
      */
-    public function getElement($path, \DOMElement $contextNode = null): ?\DOMElement
+    public function getElement($path, ?\DOMElement $contextNode = null): ?\DOMElement
     {
         $elements = $this->getElements($path, $contextNode);
         if ($elements->length > 0) {
@@ -173,7 +173,7 @@ class XMLReader
      *
      * @return string|null
      */
-    public function getAttribute($attribute, \DOMElement $contextNode = null, $path = null)
+    public function getAttribute($attribute, ?\DOMElement $contextNode = null, ?string $path = null)
     {
         $return = null;
         if ($path !== null) {
@@ -200,7 +200,7 @@ class XMLReader
      *
      * @return string|null
      */
-    public function getValue($path, \DOMElement $contextNode = null)
+    public function getValue($path, ?\DOMElement $contextNode = null)
     {
         $elements = $this->getElements($path, $contextNode);
         if ($elements->length > 0) {
@@ -218,7 +218,7 @@ class XMLReader
      *
      * @return int
      */
-    public function countElements($path, \DOMElement $contextNode = null)
+    public function countElements($path, ?\DOMElement $contextNode = null)
     {
         $elements = $this->getElements($path, $contextNode);
 
@@ -233,7 +233,7 @@ class XMLReader
      *
      * @return bool
      */
-    public function elementExists($path, \DOMElement $contextNode = null)
+    public function elementExists($path, ?\DOMElement $contextNode = null)
     {
         return $this->getElements($path, $contextNode)->length > 0;
     }

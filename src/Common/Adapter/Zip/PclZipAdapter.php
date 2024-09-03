@@ -27,7 +27,7 @@ class PclZipAdapter implements ZipInterface
         return $this;
     }
 
-    public function addFromString($localname, $contents)
+    public function addFromString(string $localname, string $contents, bool $withCompression = true)
     {
         $pathData = pathinfo($localname);
 
@@ -35,7 +35,18 @@ class PclZipAdapter implements ZipInterface
         fwrite($hFile, $contents);
         fclose($hFile);
 
-        $res = $this->oPclZip->add($this->tmpDir . '/' . $pathData['basename'], PCLZIP_OPT_REMOVE_PATH, $this->tmpDir, PCLZIP_OPT_ADD_PATH, $pathData['dirname']);
+        $params = [
+            $this->tmpDir . '/' . $pathData['basename'],
+            PCLZIP_OPT_REMOVE_PATH,
+            $this->tmpDir,
+            PCLZIP_OPT_ADD_PATH,
+            $pathData['dirname'],
+        ];
+        if (!$withCompression) {
+            $params[] = PCLZIP_OPT_NO_COMPRESSION;
+        }
+
+        $res = $this->oPclZip->add(...$params);
         if ($res == 0) {
             throw new \Exception('Error zipping files : ' . $this->oPclZip->errorInfo(true));
         }

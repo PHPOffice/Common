@@ -114,7 +114,7 @@ class PasswordEncoder
      *
      * @return string
      */
-    public static function hashPassword(string $password, string $algorithmName = self::ALGORITHM_SHA_1, string $salt = null, int $spinCount = 10000)
+    public static function hashPassword(string $password, string $algorithmName = self::ALGORITHM_SHA_1, ?string $salt = null, int $spinCount = 10000)
     {
         $origEncoding = mb_internal_encoding();
         mb_internal_encoding('UTF-8');

@@ -49,4 +49,4 @@ spl_autoload_register(function ($class) {
 });
 
 require_once __DIR__ . '/../src/Common/Autoloader.php';
-\PhpOffice\Common\Autoloader::register();
+PhpOffice\Common\Autoloader::register();
