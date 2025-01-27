@@ -36,6 +36,24 @@ class DrawingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(round($value / 60000), Drawing::angleToDegrees($value));
     }
 
+    public function testInchesPoints(): void
+    {
+        $value = rand(1, 100);
+
+        $this->assertEquals(0, Drawing::inchesToPoints(0));
+        $this->assertEquals($value * 72, Drawing::inchesToPoints($value));
+        $this->assertEquals($value / 100 * 72, Drawing::inchesToPoints($value / 100));
+    }
+
+    public function testPicasPoints(): void
+    {
+        $value = rand(1, 100);
+
+        $this->assertEquals(0, Drawing::picasToPoints(0));
+        $this->assertEquals($value * 12, Drawing::picasToPoints($value));
+        $this->assertEquals($value / 100 * 12, Drawing::picasToPoints($value / 100));
+    }
+
     public function testPixelsCentimeters(): void
     {
         $value = rand(1, 100);
