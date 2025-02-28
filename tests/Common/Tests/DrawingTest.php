@@ -70,9 +70,9 @@ class DrawingTest extends \PHPUnit\Framework\TestCase
         $value = rand(1, 100);
 
         $this->assertEquals(0, Drawing::pixelsToEmu());
-        $this->assertEquals(round($value * 9525), Drawing::pixelsToEmu($value));
+        $this->assertEquals($value * 9525, Drawing::pixelsToEmu($value));
         $this->assertEquals(0, Drawing::emuToPixels());
-        $this->assertEquals(round($value / 9525), Drawing::emuToPixels($value));
+        $this->assertEquals($value / 9525, Drawing::emuToPixels($value));
     }
 
     public function testPixelsPoints(): void
