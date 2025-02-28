@@ -7,6 +7,8 @@ parameters:
     - tests
   reportUnmatchedIgnoredErrors: false
   ignoreErrors:
+    # # PHP 8.0 & Attribute
+    - '#^Attribute class PHPUnit\\Framework\\Attributes\\DataProvider does not exist\.#'
 
   ## Remove after remove ArrayObject
   treatPhpDocTypesAsCertain: false

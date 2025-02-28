@@ -19,6 +19,7 @@
 namespace PhpOffice\Common\Tests;
 
 use PhpOffice\Common\XMLWriter;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Test class for XMLWriter
@@ -142,6 +143,7 @@ class XMLWriterTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider dataProviderWriteElementIf
      */
+    #[DataProvider('dataProviderWriteElementIf')]
     public function testWriteElementIf(bool $condition, ?string $attribute, ?string $value, string $expected): void
     {
         $xmlWriter = new XMLWriter();
