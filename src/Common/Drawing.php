@@ -107,15 +107,15 @@ class Drawing
      *
      * @param int $pValue Value in EMU
      *
-     * @return int
+     * @return float
      */
-    public static function emuToPixels(int $pValue = 0): int
+    public static function emuToPixels(int $pValue = 0): float
     {
         if ($pValue == 0) {
             return 0;
         }
 
-        return (int) round($pValue / 9525);
+        return $pValue / 9525;
     }
 
     // Source : HTML Color
@@ -212,7 +212,7 @@ class Drawing
      */
     public static function pixelsToEmu(float $pValue = 0): float
     {
-        return round($pValue * 9525);
+        return $pValue * 9525;
     }
 
     /**
