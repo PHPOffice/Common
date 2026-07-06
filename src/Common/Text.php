@@ -133,7 +133,7 @@ class Text
      */
     public static function isUTF8(string $value = ''): bool
     {
-        return is_string($value) && ($value === '' || preg_match('/^./su', $value) == 1);
+        return $value === '' || preg_match('/^./su', $value) == 1;
     }
 
     /**
