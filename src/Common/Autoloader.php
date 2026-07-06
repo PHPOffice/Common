@@ -23,7 +23,7 @@ namespace PhpOffice\Common;
  */
 class Autoloader
 {
-    /** @const string */
+    /** @var string */
     public const NAMESPACE_PREFIX = 'PhpOffice\\Common\\';
 
     /**
