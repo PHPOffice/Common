@@ -61,7 +61,7 @@ class XmlDocument
      */
     public function __construct(string $path)
     {
-        $this->path = realpath($path);
+        $this->path = realpath($path) ?: '';
     }
 
     /**
@@ -93,7 +93,7 @@ class XmlDocument
      * @param string $path
      * @param string $file
      *
-     * @return \DOMNodeList<\DOMElement>
+     * @return \DOMNodeList<\DOMNameSpaceNode|\DOMNode>
      */
     public function getNodeList(string $path, string $file = 'word/document.xml'): \DOMNodeList
     {
@@ -105,7 +105,9 @@ class XmlDocument
             $this->xpath = new \DOMXpath($this->dom);
         }
 
-        return $this->xpath->query($path);
+        $elements = $this->xpath->query($path);
+
+        return $elements === false ? new \DOMNodeList() : $elements;
     }
 
     /**
@@ -118,9 +120,12 @@ class XmlDocument
      */
     public function getElement(string $path, string $file = 'word/document.xml'): \DOMNode
     {
-        $elements = $this->getNodeList($path, $file);
+        $element = $this->getNodeList($path, $file)->item(0);
+        if (!$element instanceof \DOMNode) {
+            throw new \Exception('Element not found: ' . $path);
+        }
 
-        return $elements->item(0);
+        return $element;
     }
 
     /**

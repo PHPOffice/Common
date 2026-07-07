@@ -39,6 +39,9 @@ class TestHelperZip
         $oZip = new \ZipArchive();
         $oZip->open($fileZip);
         $stat = $oZip->statName($path);
+        if ($stat === false) {
+            return false;
+        }
 
         // size: uncompressed
         // comp_size: compressed

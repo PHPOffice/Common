@@ -53,7 +53,7 @@ abstract class AbstractZipAdapter extends \PHPUnit\Framework\TestCase
     public function testAddFromStringWithCompression(): void
     {
         $expectedPath = 'file.png';
-        $expectedContent = file_get_contents(
+        $expectedContent = (string) file_get_contents(
             PHPOFFICE_COMMON_TESTS_BASE_DIR
             . DIRECTORY_SEPARATOR . 'resources'
             . DIRECTORY_SEPARATOR . 'images'
@@ -73,7 +73,7 @@ abstract class AbstractZipAdapter extends \PHPUnit\Framework\TestCase
     public function testAddFromStringWithNoCompression(): void
     {
         $expectedPath = 'file.png';
-        $expectedContent = file_get_contents(
+        $expectedContent = (string) file_get_contents(
             PHPOFFICE_COMMON_TESTS_BASE_DIR
             . DIRECTORY_SEPARATOR . 'resources'
             . DIRECTORY_SEPARATOR . 'images'
