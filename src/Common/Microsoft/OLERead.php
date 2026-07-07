@@ -79,11 +79,11 @@ class OLERead
      */
     public $pictures;
     /**
-     * @var int|null
+     * @var int
      */
-    public $rootEntry;
+    public $rootEntry = 0;
     /**
-     * @var array<int, array<string, int|string>>
+     * @var array<int, array{name: string, type: int, startBlock: int, size: int}>
      */
     public $props = [];
     /**
@@ -115,15 +115,19 @@ class OLERead
 
         // Get the file identifier
         // Don't bother reading the whole file until we know it's a valid OLE file
-        $this->data = file_get_contents($sFileName, false, null, 0, 8);
+        $header = file_get_contents($sFileName, false, null, 0, 8);
 
         // Check OLE identifier
-        if ($this->data != self::IDENTIFIER_OLE) {
+        if ($header !== self::IDENTIFIER_OLE) {
             throw new \Exception('The filename ' . $sFileName . ' is not recognised as an OLE file');
         }
 
         // Get the file data
-        $this->data = file_get_contents($sFileName);
+        $data = file_get_contents($sFileName);
+        if ($data === false) {
+            throw new \Exception('Could not read ' . $sFileName . '.');
+        }
+        $this->data = $data;
 
         // Total number of sectors used for the SAT
         $numBigBlkDepotBlks = self::getInt4d($this->data, self::NUM_BIG_BLOCK_DEPOT_BLOCKS_POS);
