@@ -38,7 +38,7 @@ class PasswordEncoder
     /**
      * Mapping between algorithm name and algorithm ID
      *
-     * @var array<string, array<int, int|string>>
+     * @var array<string, array{0: int, 1: string}>
      *
      * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.wordprocessing.writeprotection.cryptographicalgorithmsid(v=office.14).aspx
      */
