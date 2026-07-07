@@ -74,14 +74,16 @@ class File
                 $returnValue = $zip->getFromName($archiveFile);
                 $zip->close();
 
-                return $returnValue;
+                return $returnValue === false ? null : $returnValue;
             }
 
             return null;
         }
 
         // Regular file contents
-        return file_get_contents($pFilename);
+        $contents = file_get_contents($pFilename);
+
+        return $contents === false ? null : $contents;
     }
 
     /**

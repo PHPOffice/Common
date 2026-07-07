@@ -106,7 +106,9 @@ class XMLWriter extends \XMLWriter
 
         $this->flush();
 
-        return file_get_contents($this->tempFileName);
+        $contents = file_get_contents($this->tempFileName);
+
+        return false === $contents ? '' : $contents;
     }
 
     /**
