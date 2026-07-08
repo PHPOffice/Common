@@ -1,5 +1,5 @@
 parameters:
-  level: 6
+  level: 7
   bootstrapFiles:
     - tests/bootstrap.php
   paths:
@@ -9,6 +9,11 @@ parameters:
   ignoreErrors:
     # # PHP 8.0 & Attribute
     - '#^Attribute class PHPUnit\\Framework\\Attributes\\DataProvider does not exist\.#'
+    # DOMNodeList's generic type (TNode) cannot be pinned across the PHP matrix:
+    # DOMXPath::query() returns DOMNodeList<DOMNode> on PHP 7.x but
+    # DOMNodeList<DOMNameSpaceNode|DOMNode> on PHP 8.x, so no single generic is valid
+    # on every version. The list is only consumed through length/item(), never by node type.
+    - '#return type with generic class DOMNodeList does not specify its types: TNode#'
 
   ## Remove after remove ArrayObject
   treatPhpDocTypesAsCertain: false

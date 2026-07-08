@@ -24,7 +24,7 @@ abstract class AbstractZipAdapter extends \PHPUnit\Framework\TestCase
         parent::setUp();
 
         $pathResources = PHPOFFICE_COMMON_TESTS_BASE_DIR . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
-        $this->zipTest = tempnam(sys_get_temp_dir(), 'PhpOfficeCommon');
+        $this->zipTest = (string) tempnam(sys_get_temp_dir(), 'PhpOfficeCommon');
         copy($pathResources . 'Sample_01_Simple.pptx', $this->zipTest);
     }
 
@@ -53,7 +53,7 @@ abstract class AbstractZipAdapter extends \PHPUnit\Framework\TestCase
     public function testAddFromStringWithCompression(): void
     {
         $expectedPath = 'file.png';
-        $expectedContent = file_get_contents(
+        $expectedContent = (string) file_get_contents(
             PHPOFFICE_COMMON_TESTS_BASE_DIR
             . DIRECTORY_SEPARATOR . 'resources'
             . DIRECTORY_SEPARATOR . 'images'
@@ -73,7 +73,7 @@ abstract class AbstractZipAdapter extends \PHPUnit\Framework\TestCase
     public function testAddFromStringWithNoCompression(): void
     {
         $expectedPath = 'file.png';
-        $expectedContent = file_get_contents(
+        $expectedContent = (string) file_get_contents(
             PHPOFFICE_COMMON_TESTS_BASE_DIR
             . DIRECTORY_SEPARATOR . 'resources'
             . DIRECTORY_SEPARATOR . 'images'

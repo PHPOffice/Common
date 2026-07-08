@@ -38,7 +38,7 @@ class PasswordEncoder
     /**
      * Mapping between algorithm name and algorithm ID
      *
-     * @var array<string, array<int, int|string>>
+     * @var array<string, array{0: int, 1: string}>
      *
      * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.wordprocessing.writeprotection.cryptographicalgorithmsid(v=office.14).aspx
      */
@@ -124,7 +124,7 @@ class PasswordEncoder
 
         //   Get the single-byte values by iterating through the Unicode characters of the truncated password.
         //   For each character, if the low byte is not equal to 0, take it. Otherwise, take the high byte.
-        $passUtf8 = mb_convert_encoding($password, 'UCS-2LE', 'UTF-8');
+        $passUtf8 = (string) mb_convert_encoding($password, 'UCS-2LE', 'UTF-8');
         $byteChars = [];
 
         for ($i = 0; $i < mb_strlen($password); ++$i) {

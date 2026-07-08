@@ -32,15 +32,17 @@ class PclZipAdapter implements ZipInterface
         $pathData = pathinfo($localname);
 
         $hFile = fopen($this->tmpDir . '/' . $pathData['basename'], 'wb');
-        fwrite($hFile, $contents);
-        fclose($hFile);
+        if ($hFile !== false) {
+            fwrite($hFile, $contents);
+            fclose($hFile);
+        }
 
         $params = [
             $this->tmpDir . '/' . $pathData['basename'],
             PCLZIP_OPT_REMOVE_PATH,
             $this->tmpDir,
             PCLZIP_OPT_ADD_PATH,
-            $pathData['dirname'],
+            dirname($localname),
         ];
         if (!$withCompression) {
             $params[] = PCLZIP_OPT_NO_COMPRESSION;

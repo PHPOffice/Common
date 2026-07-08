@@ -140,9 +140,9 @@ class Drawing
             return null;
         }
 
-        $colorR = hexdec($colorR);
-        $colorG = hexdec($colorG);
-        $colorB = hexdec($colorB);
+        $colorR = (int) hexdec($colorR);
+        $colorG = (int) hexdec($colorG);
+        $colorB = (int) hexdec($colorB);
 
         return [$colorR, $colorG, $colorB];
     }
