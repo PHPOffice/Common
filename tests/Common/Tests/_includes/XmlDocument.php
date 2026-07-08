@@ -93,7 +93,7 @@ class XmlDocument
      * @param string $path
      * @param string $file
      *
-     * @return \DOMNodeList<\DOMNameSpaceNode|\DOMNode>
+     * @return \DOMNodeList
      */
     public function getNodeList(string $path, string $file = 'word/document.xml'): \DOMNodeList
     {
@@ -107,7 +107,7 @@ class XmlDocument
 
         $elements = $this->xpath->query($path);
 
-        return $elements === false ? new \DOMNodeList() : $elements;
+        return $elements === false ? (new \DOMDocument())->childNodes : $elements;
     }
 
     /**

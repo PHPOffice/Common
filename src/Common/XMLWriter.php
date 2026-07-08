@@ -64,10 +64,13 @@ class XMLWriter extends \XMLWriter
                 $pTemporaryStorageDir = sys_get_temp_dir();
             }
             // Create temporary filename
-            $this->tempFileName = @tempnam($pTemporaryStorageDir, 'xml');
+            $tempFileName = @tempnam($pTemporaryStorageDir, 'xml');
+            if ($tempFileName !== false) {
+                $this->tempFileName = $tempFileName;
 
-            // Open storage
-            $this->openUri($this->tempFileName);
+                // Open storage
+                $this->openUri($this->tempFileName);
+            }
         }
 
         if ($compatibility) {

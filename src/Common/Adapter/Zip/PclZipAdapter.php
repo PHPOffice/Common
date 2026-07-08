@@ -42,7 +42,7 @@ class PclZipAdapter implements ZipInterface
             PCLZIP_OPT_REMOVE_PATH,
             $this->tmpDir,
             PCLZIP_OPT_ADD_PATH,
-            $pathData['dirname'] ?? '',
+            dirname($localname),
         ];
         if (!$withCompression) {
             $params[] = PCLZIP_OPT_NO_COMPRESSION;

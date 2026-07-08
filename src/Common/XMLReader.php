@@ -107,12 +107,12 @@ class XMLReader
      * @param string $path
      * @param \DOMElement $contextNode
      *
-     * @return \DOMNodeList<\DOMNameSpaceNode|\DOMNode>
+     * @return \DOMNodeList
      */
     public function getElements(string $path, ?\DOMElement $contextNode = null)
     {
         if ($this->dom === null) {
-            return new \DOMNodeList();
+            return (new \DOMDocument())->childNodes;
         }
         if ($this->xpath === null) {
             $this->xpath = new \DOMXpath($this->dom);
@@ -122,7 +122,7 @@ class XMLReader
             ? $this->xpath->query($path)
             : $this->xpath->query($path, $contextNode);
 
-        return $elements === false ? new \DOMNodeList() : $elements;
+        return $elements === false ? (new \DOMDocument())->childNodes : $elements;
     }
 
     /**

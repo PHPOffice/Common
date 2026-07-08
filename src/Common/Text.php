@@ -93,7 +93,7 @@ class Text
     public static function chr(int $dec): string
     {
         if ($dec <= 0x7F) {
-            return chr($dec);
+            return chr($dec & 0xFF);
         }
         if ($dec <= 0x7FF) {
             return chr(($dec >> 6) + 192) . chr(($dec & 63) + 128);
@@ -226,7 +226,7 @@ class Text
 
         foreach ($unicode as $value) {
             if ($value != 65279) {
-                $entities .= $value > 127 ? '\uc0{\u' . $value . '}' : chr($value);
+                $entities .= $value > 127 ? '\uc0{\u' . $value . '}' : chr($value & 0xFF);
             }
         }
 
