@@ -115,19 +115,15 @@ class OLERead
 
         // Get the file identifier
         // Don't bother reading the whole file until we know it's a valid OLE file
-        $header = file_get_contents($sFileName, false, null, 0, 8);
+        $this->data = (string) file_get_contents($sFileName, false, null, 0, 8);
 
         // Check OLE identifier
-        if ($header !== self::IDENTIFIER_OLE) {
+        if ($this->data != self::IDENTIFIER_OLE) {
             throw new \Exception('The filename ' . $sFileName . ' is not recognised as an OLE file');
         }
 
         // Get the file data
-        $data = file_get_contents($sFileName);
-        if ($data === false) {
-            throw new \Exception('Could not read ' . $sFileName . '.');
-        }
-        $this->data = $data;
+        $this->data = (string) file_get_contents($sFileName);
 
         // Total number of sectors used for the SAT
         $numBigBlkDepotBlks = self::getInt4d($this->data, self::NUM_BIG_BLOCK_DEPOT_BLOCKS_POS);
