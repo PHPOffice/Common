@@ -242,10 +242,9 @@ class Text
      */
     public static function removeUnderscorePrefix(?string $value): string
     {
-        if (!is_null($value)) {
-            if (substr($value, 0, 1) == '_') {
-                $value = substr($value, 1);
-            }
+        $value = (string) $value;
+        if (substr($value, 0, 1) == '_') {
+            $value = (string) substr($value, 1);
         }
 
         return $value;
